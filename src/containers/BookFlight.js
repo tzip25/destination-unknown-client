@@ -6,7 +6,7 @@ import v4 from 'uuid'
 class BookFlight extends React.Component {
 
   renderflights = () => {
-    return this.props.flights.map(flight => < Flight key={v4()} flight={flight} />)
+    return this.props.flights.map(flight => < Flight key={v4()} flight={flight} button={true}/>)
   }
 
   render(){

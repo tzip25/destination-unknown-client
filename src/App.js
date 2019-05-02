@@ -19,7 +19,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        < Nav handleNavClick={this.handleNavClick}/>
+        < Nav currentPage={this.state.currentPage} handleNavClick={this.handleNavClick}/>
         < BodyContainer currentPage={this.state.currentPage}/>
       </div>
     );

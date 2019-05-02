@@ -21,11 +21,24 @@ class BookFlightForm extends React.Component {
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
-        <input onChange={this.handleChange} value={this.state.departure} name={"departure"} placeholder="Departure City" />
-        <input onChange={this.handleChange} value={this.state.date} name={"date"} placeholder="Date" />
-        <input onChange={this.handleChange} value={this.state.budget} name={"budget"} placeholder="Budget" />
-        <button>Search Flights</button>
+      <form onSubmit={this.handleSubmit} className="ui form" id="search-form">
+        <div className="field">
+          <label>Departure</label>
+          <input onChange={this.handleChange} value={this.state.departure} name={"departure"} placeholder="Departure City" />
+        </div>
+        <div className="field">
+          <label>Departure Date</label>
+          <input onChange={this.handleChange} value={this.state.date} name={"date"} placeholder="Date" />
+        </div>
+        <div className="field">
+          <label>Return Date</label>
+          <input onChange={this.handleChange} value={this.state.date} name={"date"} placeholder="Date" />
+        </div>
+        <div className="field">
+          <label>Budget</label>
+          <input onChange={this.handleChange} value={this.state.budget} name={"budget"} placeholder="Budget" />
+        </div>
+          <button className="ui button">Search Flights</button>
       </form>
     )
   }
