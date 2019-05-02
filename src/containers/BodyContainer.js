@@ -28,8 +28,14 @@ class BodyContainer extends React.Component {
     }
   }
 
-  handleSearchFlight = (arg) => {
-    console.log(arg);
+  handleSearchFlight = (formData) => {
+    fetch('http://localhost:3000/flightsSearch', {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({start_location: formData.departure, date: formData.date, price: formData.budget})
+    })
+    .then(res=>res.json())
+    .then(console.log)
   }
 
   render(){

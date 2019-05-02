@@ -31,10 +31,6 @@ class BookFlightForm extends React.Component {
           <input onChange={this.handleChange} value={this.state.date} name={"date"} placeholder="Date" />
         </div>
         <div className="field">
-          <label>Return Date</label>
-          <input onChange={this.handleChange} value={this.state.date} name={"date"} placeholder="Date" />
-        </div>
-        <div className="field">
           <label>Budget</label>
           <input onChange={this.handleChange} value={this.state.budget} name={"budget"} placeholder="Budget" />
         </div>
