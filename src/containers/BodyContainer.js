@@ -6,7 +6,7 @@ import SavedFlights from './SavedFlights'
 class BodyContainer extends React.Component {
 
   state = {
-    flights: []
+    flights: [{start_location: "JFK"}]
   }
 
   renderCurrentPage = () => {
@@ -14,11 +14,17 @@ class BodyContainer extends React.Component {
       case "View my Profile":
         return < Profile />
       case "Book a Flight":
-        return < BookFlight handleSearchFlight={this.handleSearchFlight}/>
+        return < BookFlight
+        handleSearchFlight={this.handleSearchFlight}
+        flights={this.state.flights}
+        />
       case "Saved Flights":
         return < SavedFlights />
       default:
-        return < BookFlight handleSearchFlight={this.handleSearchFlight}/>
+        return < BookFlight
+        handleSearchFlight={this.handleSearchFlight}
+        flights={this.state.flights}
+        />
     }
   }
 
