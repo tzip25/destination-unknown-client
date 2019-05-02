@@ -6,7 +6,8 @@ import SavedFlights from './SavedFlights'
 class BodyContainer extends React.Component {
 
   state = {
-    flights: [{start_location: "JFK"}]
+    flights: [],
+    invalid: false
   }
 
   renderCurrentPage = () => {
@@ -16,15 +17,12 @@ class BodyContainer extends React.Component {
       case "Book a Flight":
         return < BookFlight
         handleSearchFlight={this.handleSearchFlight}
-        flights={this.state.flights}
+        flights={this.state.invalid ? "invalid" : this.state.flights}
         />
       case "Saved Flights":
         return < SavedFlights />
       default:
-        return < BookFlight
-        handleSearchFlight={this.handleSearchFlight}
-        flights={this.state.flights}
-        />
+        return < SavedFlights />
     }
   }
 
@@ -35,7 +33,19 @@ class BodyContainer extends React.Component {
       body: JSON.stringify({start_location: formData.departure, date: formData.date, price: formData.budget})
     })
     .then(res=>res.json())
-    .then(console.log)
+    .then(flights => {
+      if(flights[0] === "invalid"){
+        this.setState({
+          flights: [],
+          invalid: true
+        })
+      } else {
+        this.setState({
+          flights: flights,
+          invalid: false
+        })
+      }
+    })
   }
 
   render(){
