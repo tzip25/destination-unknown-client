@@ -20,21 +20,21 @@ const Flight = (props) => {
       <thead>
         <tr>
           <th>Airline</th>
-          <th>Departure Date</th>
-          <th>Return Date</th>
-          <th>Departure</th>
-          <th>Arival</th>
+          <th>Departure City / Airport</th>
+          <th>Departure Date/Time</th>
+          <th>Arrival Airport</th>
+          <th>Arrival Date/Time</th>
           <th>Price</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{flight.airline}</td>
-          <td>{null}</td>
-          <td>{null}</td>
-          <td>{flight.start_location}</td>
-          <td>{flight.end_location}</td>
-          <td>{flight.price}</td>
+          <td>{flight.start_location} / {flight.start_airport}</td>
+          <td>{flight.departure_time}</td>
+          <td>{flight.end_location} / {flight.end_airport}</td>
+          <td>{flight.arrival_time}</td>
+          <td>${flight.price}</td>
         </tr>
       </tbody>
     </table>
