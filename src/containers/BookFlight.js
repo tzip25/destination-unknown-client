@@ -6,12 +6,19 @@ import v4 from 'uuid'
 class BookFlight extends React.Component {
 
   renderflights = () => {
-    return this.props.flights === "invalid" ?
-    <div className="ui negative message">
-      <div className="header">Invalid search. Please enter a valid city</div>
+    if (this.props.flights === "invalid") {
+      return <div className="ui negative message">
+        <div className="header">Invalid search. Please enter a valid city</div>
+      </div>
+    } else if (this.props.flights.length === 0) {
+      return <div className="ui message">
+        <div className="header">No Matching Flights. Try Increasing your budget!</div>
     </div>
-    :
-    this.props.flights.map(flight => < Flight key={v4()} flight={flight} button={true}/>)
+    } else if (this.props.flights[0] === "default") {
+      return null
+    } else {
+      return this.props.flights.map(flight => < Flight key={v4()} flight={flight} button={true}/>)
+    }
   }
 
   render(){

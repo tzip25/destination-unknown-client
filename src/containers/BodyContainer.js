@@ -6,7 +6,7 @@ import SavedFlights from './SavedFlights'
 class BodyContainer extends React.Component {
 
   state = {
-    flights: [],
+    flights: ["default"],
     invalid: false,
     isLoading: false
   }
@@ -63,7 +63,6 @@ class BodyContainer extends React.Component {
   }
 
   render(){
-    console.log("searched flights", this.state.flights)
     return(
       <div>
       {this.state.isLoading ? this.renderLoadingScreen(): this.renderCurrentPage()}
