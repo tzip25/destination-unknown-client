@@ -7,38 +7,40 @@ const Flight = (props) => {
     fetch('http://localhost:3000/flights', {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({start_location: "JFK", end_location: "DEN", date:"2019-11-10", airline:"Delta"})
+      body: JSON.stringify({start_location: flight.start_location, end_location: flight.end_location, date: flight.departure_time, airline: flight.airline})
     })
     .then(res=>res.json())
     .then(console.log)
   }
 
   return(
-    <div>
-
-    <table className="ui celled table">
-      <thead>
-        <tr>
-          <th>Airline</th>
-          <th>Departure City / Airport</th>
-          <th>Departure Date/Time</th>
-          <th>Arrival Airport</th>
-          <th>Arrival Date/Time</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{flight.airline}</td>
-          <td>{flight.start_location} / {flight.start_airport}</td>
-          <td>{flight.departure_time}</td>
-          <td>{flight.end_location} / {flight.end_airport}</td>
-          <td>{flight.arrival_time}</td>
-          <td>${flight.price}</td>
-        </tr>
-      </tbody>
-    </table>
-    {props.button ? <button className="ui button" onClick={handleClick}>Save Flight</button> : null}
+    <div id="flight-component" className="ui clearing segments">
+      <table className="ui blue table">
+        <thead>
+          <tr>
+            <th>Airline</th>
+            <th>Departure City / Airport</th>
+            <th>Departure Date/Time</th>
+            <th>Arrival Airport</th>
+            <th>Arrival Date/Time</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{flight.airline}</td>
+            <td>{flight.start_location} / {flight.start_airport}</td>
+            <td>{flight.departure_time}</td>
+            <td>{flight.end_location} / {flight.end_airport}</td>
+            <td>{flight.arrival_time}</td>
+            <td>${flight.price}</td>
+          </tr>
+          {props.button ? <tr>
+          <td colSpan="6">
+          <div className="ui right floated button orange" onClick={handleClick}>Book Flight</div></td>
+          </tr> : null}
+        </tbody>
+      </table>
     </div>
   )
 }
