@@ -1,6 +1,8 @@
 import React from "react";
 import BookFlightForm from '../components/BookFlightForm'
 import Flight from '../components/Flight'
+import Sort from '../components/Sort'
+
 import v4 from 'uuid'
 
 class BookFlight extends React.Component {
@@ -17,7 +19,12 @@ class BookFlight extends React.Component {
     } else if (this.props.flights[0] === "default") {
       return null
     } else {
-      return this.props.flights.map(flight => < Flight key={v4()} flight={flight} button={true}/>)
+      return (
+        <div>
+        < Sort handleSort={this.props.handleSort}/>
+        {this.props.flights.map(flight => < Flight key={v4()} flight={flight} button={true}/>)}
+        </div>
+      )
     }
   }
 
