@@ -16,7 +16,7 @@ class BookFlightForm extends React.Component {
 
   handleDateChange = (e) => {
     let  hi = e.target.value.split('-').reverse()
-    hi = [hi[0], hi[1], hi[2]] = [hi[1], hi[0], hi[2]]
+    hi = [hi[0], hi[1]] = [hi[1], hi[0], hi[2]]
     this.setState({
       date: hi.join('/')
     })

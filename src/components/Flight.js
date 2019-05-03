@@ -7,12 +7,12 @@ const Flight = (props) => {
     fetch('http://localhost:3000/flights', {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({start_location: flight.start_location, end_location: flight.end_location, date: flight.departure_time, airline: flight.airline})
+      body: JSON.stringify(flight)
     })
     .then(res=>res.json())
     .then(console.log)
   }
-
+  console.log(flight)
   return(
     <div id="flight-component" className="ui clearing segments">
       <table className="ui blue table">
@@ -30,9 +30,9 @@ const Flight = (props) => {
           <tr>
             <td>{flight.airline}</td>
             <td>{flight.start_location} <br/> {flight.start_airport}</td>
-            <td>{flight.departure_date} <br/> {flight.departure_time}</td>
+            <td>{new Date(`${flight.departure_date} EDT`).toDateString()} <br/> {flight.departure_time}</td>
             <td>{flight.end_location} <br/> {flight.end_airport}</td>
-            <td>{flight.arrival_date} <br/> {flight.arrival_time}</td>
+            <td>{new Date(`${flight.arrival_date} EDT`).toDateString()} <br/> {flight.arrival_time}</td>
             <td>${flight.price}</td>
           </tr>
           {props.button ? <tr>
