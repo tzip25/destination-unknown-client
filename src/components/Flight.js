@@ -29,10 +29,10 @@ const Flight = (props) => {
         <tbody>
           <tr>
             <td>{flight.airline}</td>
-            <td>{flight.start_location} / {flight.start_airport}</td>
-            <td>{flight.departure_time}</td>
-            <td>{flight.end_location} / {flight.end_airport}</td>
-            <td>{flight.arrival_time}</td>
+            <td>{flight.start_location} <br/> {flight.start_airport}</td>
+            <td>{flight.departure_date} <br/> {flight.departure_time}</td>
+            <td>{flight.end_location} <br/> {flight.end_airport}</td>
+            <td>{flight.arrival_date} <br/> {flight.arrival_time}</td>
             <td>${flight.price}</td>
           </tr>
           {props.button ? <tr>

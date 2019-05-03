@@ -49,6 +49,7 @@ class BodyContainer extends React.Component {
   }
 
   render(){
+    console.log("searched flights", this.state.flights)
     return(
       <div>
       {this.renderCurrentPage()}
