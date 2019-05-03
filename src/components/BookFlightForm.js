@@ -14,6 +14,14 @@ class BookFlightForm extends React.Component {
     })
   }
 
+  handleDateChange = (e) => {
+    let  hi = e.target.value.split('-').reverse()
+    hi = [hi[0], hi[1], hi[2]] = [hi[1], hi[0], hi[2]]
+    this.setState({
+      date: hi.join('/')
+    })
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     // const formattedDate = this.state.date.replace(/-/g, '/');
@@ -22,6 +30,7 @@ class BookFlightForm extends React.Component {
   }
 
   render(){
+    console.log(this.state)
     return(
       <form onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div className="three fields">
@@ -31,7 +40,7 @@ class BookFlightForm extends React.Component {
           </div>
           <div className="field">
             <label>Departure Date</label>
-            <input onChange={this.handleChange} value={this.state.date} name={"date"} placeholder="Date" />
+            <input type="date" onChange={this.handleDateChange} name={"date"} placeholder="Date" />
           </div>
           <div className="field">
             <label>Max Budget</label>
