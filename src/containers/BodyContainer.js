@@ -7,7 +7,8 @@ class BodyContainer extends React.Component {
 
   state = {
     flights: [],
-    invalid: false
+    invalid: false,
+    isLoading: false
   }
 
   renderCurrentPage = () => {
@@ -26,7 +27,18 @@ class BodyContainer extends React.Component {
     }
   }
 
+  renderLoadingScreen = () => {
+    return(
+      <div className="ui active inverted dimmer">
+        <div className="ui text loader">Finding You Amazing Adventures!</div>
+      </div>
+    )
+  }
+
   handleSearchFlight = (formData) => {
+    this.setState({
+      isLoading: true
+     })
     fetch('http://localhost:3000/flightsSearch', {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
@@ -37,12 +49,14 @@ class BodyContainer extends React.Component {
       if(flights[0] === "invalid"){
         this.setState({
           flights: [],
-          invalid: true
+          invalid: true,
+          isLoading: false
         })
       } else {
         this.setState({
           flights: flights,
-          invalid: false
+          invalid: false,
+          isLoading: false
         })
       }
     })
@@ -52,7 +66,7 @@ class BodyContainer extends React.Component {
     console.log("searched flights", this.state.flights)
     return(
       <div>
-      {this.renderCurrentPage()}
+      {this.state.isLoading ? this.renderLoadingScreen(): this.renderCurrentPage()}
       </div>
     )
   }
