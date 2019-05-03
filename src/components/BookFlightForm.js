@@ -16,7 +16,9 @@ class BookFlightForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    // const formattedDate = this.state.date.replace(/-/g, '/');
     this.props.handleSearchFlight(this.state)
+    // console.log(formattedDate);
   }
 
   render(){
@@ -29,7 +31,7 @@ class BookFlightForm extends React.Component {
           </div>
           <div className="field">
             <label>Departure Date</label>
-            <input type="date" onChange={this.handleChange} value={this.state.date} name={"date"} placeholder="Date" />
+            <input onChange={this.handleChange} value={this.state.date} name={"date"} placeholder="Date" />
           </div>
           <div className="field">
             <label>Max Budget</label>
