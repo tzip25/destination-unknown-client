@@ -46,6 +46,7 @@ class BodyContainer extends React.Component {
     })
     .then(res=>res.json())
     .then(flights => {
+      console.log(flights);
       if(flights[0] === "invalid"){
         this.setState({
           flights: [],

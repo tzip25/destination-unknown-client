@@ -15,22 +15,18 @@ class BookFlightForm extends React.Component {
   }
 
   handleDateChange = (e) => {
-    let  hi = e.target.value.split('-').reverse()
-    hi = [hi[0], hi[1]] = [hi[1], hi[0], hi[2]]
+    let dateArr = e.target.value.split('-').reverse()
     this.setState({
-      date: hi.join('/')
+      date: dateArr.join('/')
     })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    // const formattedDate = this.state.date.replace(/-/g, '/');
     this.props.handleSearchFlight(this.state)
-    // console.log(formattedDate);
   }
 
   render(){
-    console.log(this.state)
     return(
       <form onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div className="three fields">
