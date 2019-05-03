@@ -17,12 +17,13 @@ class SavedFlights extends React.Component {
       })
     })
   }
-
+  
   renderflights = () => {
     return this.state.flights.map(flight => < Flight key={v4()} flight={flight}/>)
   }
-
+  
   render(){
+    console.log("saved flights", this.state.flights)
     return(
       <div>
       {this.renderflights()}
