@@ -12,7 +12,7 @@ const Flight = (props) => {
     .then(res=>res.json())
     .then(console.log)
   }
-  console.log(flight)
+
   return(
     <div id="flight-component" className="ui clearing segments">
       <table className="ui blue table">
