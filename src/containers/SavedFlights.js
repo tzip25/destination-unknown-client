@@ -17,16 +17,30 @@ class SavedFlights extends React.Component {
       })
     })
   }
+
+  upcomingFlights = () => {
+    return this.state.flights.filter(flight => {
+      return new Date(flight.departure_date) > new Date()
+    })
+  }
+
+  pastFlights = () => {
+    return this.state.flights.filter(flight => {
+      return new Date(flight.departure_date) < new Date()
+    })
+  }
   
-  renderflights = () => {
-    return this.state.flights.map(flight => < Flight key={v4()} flight={flight}/>)
+  renderflights = (flights) => {
+    return flights.map(flight => < Flight key={v4()} flight={flight}/>)
   }
   
   render(){
-    console.log("saved flights", this.state.flights)
     return(
       <div>
-      {this.renderflights()}
+        <h1>Upcoming Flights</h1>
+          {this.renderflights(this.upcomingFlights())}
+        <h1>Past Flights</h1>
+          {this.renderflights(this.pastFlights())}
       </div>
     )
   }
