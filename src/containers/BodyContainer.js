@@ -22,7 +22,7 @@ class BodyContainer extends React.Component {
           return this.sortDepartureTime()
         case "Arrival Time":
           return this.sortArrivalTime()
-        case "City":
+        case "City: A-Z":
           return this.sortCity()
         default:
           return this.sortPriceLowToHigh()
@@ -85,7 +85,7 @@ class BodyContainer extends React.Component {
         flights={this.state.invalid ? "invalid" : this.state.flights}
         handleSort={this.handleSort}
         />
-      case "Saved Flights":
+      case "My Flights":
         return < SavedFlights />
       default:
         return < SavedFlights />
@@ -95,7 +95,7 @@ class BodyContainer extends React.Component {
   renderLoadingScreen = () => {
     return(
       <div className="ui active inverted dimmer">
-        <div className="ui text loader">Finding You Amazing Adventures!</div>
+        <div id="loading-text" className="ui text loader">Finding You Amazing Adventures!</div>
       </div>
     )
   }

@@ -18,11 +18,11 @@ class Sort extends React.Component {
     console.log(this.state);
     return(
       <div id="sort-dropdown">
-      Sort by:
-        <select onChange={this.sortBy}>
+      <span id="sortby-text">Sort By</span>
+        <select className="ui search dropdown" onChange={this.sortBy}>
         <option>Price: Low to High</option>
         <option>Price: High to Low</option>
-        <option>City</option>
+        <option>City: A-Z</option>
         <option>Departure Time</option>
         <option>Arrival Time</option>
         </select>

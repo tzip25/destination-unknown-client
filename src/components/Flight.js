@@ -14,7 +14,7 @@ const Flight = (props) => {
   }
 
   return(
-    <div id="flight-component" className="ui clearing segments">
+    <div className="ui clearing segments">
       <table className="ui blue table">
         <thead>
           <tr>

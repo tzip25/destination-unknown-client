@@ -43,7 +43,7 @@ class BookFlightForm extends React.Component {
             <input type="number" onChange={this.handleChange} value={this.state.budget} name={"budget"} placeholder="Budget" />
           </div>
         </div>
-          <button id="searchflight-button" className="ui button blue">Find Me a Destination!</button>
+          <button id="searchflight-button" className="ui button yellow">Find a Destination!</button>
       </form>
     )
   }

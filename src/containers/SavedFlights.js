@@ -29,11 +29,11 @@ class SavedFlights extends React.Component {
       return new Date(flight.departure_date) < new Date()
     })
   }
-  
+
   renderflights = (flights) => {
     return flights.map(flight => < Flight key={v4()} flight={flight}/>)
   }
-  
+
   render(){
     return(
       <div>
