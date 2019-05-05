@@ -1,4 +1,5 @@
 import React from "react";
+// import { Route, Switch } from 'react-router-dom'
 import Profile from './Profile'
 import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
@@ -45,7 +46,7 @@ class BodyContainer extends React.Component {
       flights: sortedFlights
     })
   }
-  
+
   sortArrivalTime = () => {
     const sortedFlights = [...this.state.flights].sort((a,b) => {
       return a.unx_atime - b.unx_atime
@@ -75,6 +76,11 @@ class BodyContainer extends React.Component {
 
 
   renderCurrentPage = () => {
+    // return <Switch>
+    //   <Route path='/profile' render={(props) => < Profile {...props}/>} />
+    //   <Route path='/newflight' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.state.flights} handleSort={this.handleSort} />} />
+    //   <Route path='/myflights' render={() => < SavedFlights />} />
+    // </Switch>
     switch(this.props.currentPage){
       case "View my Profile":
         return < Profile />
@@ -128,7 +134,7 @@ class BodyContainer extends React.Component {
 
   render(){
     return(
-      <div>
+      <div className="main-body">
       {this.state.isLoading ? this.renderLoadingScreen(): this.renderCurrentPage()}
       </div>
     )

@@ -33,8 +33,8 @@ const Flight = (props) => {
         <tbody>
           <tr>
             <td className="flight-price">{currencySymbol()}{flight.price}</td>
-            <td><img src={flight.airline_logo} width="35"/></td>
-            <td>{flight.start_location} ({flight.start_airport}) → {flight.end_location} ({flight.end_airport})
+            <td><img src={flight.airline_logo} width="35" alt="airline logo"/></td>
+            <td className="flight-route">{flight.start_location} ({flight.start_airport}) → {flight.end_location} ({flight.end_airport})
             <br/>
             <span id="small-flight-text">{flight.airline}</span></td>
             <td>{flight.departure_time}<br/><span id="small-flight-text">{new Date(`${flight.departure_date} EDT`).toDateString()}</span></td>

@@ -1,4 +1,5 @@
 import React from 'react';
+// import { Route, Switch } from 'react-router-dom'
 import './App.css';
 import Nav from './containers/Nav'
 import BodyContainer from './containers/BodyContainer'
@@ -18,11 +19,9 @@ class App extends React.Component {
 
   render(){
     return (
-      <div>
-          < Nav currentPage={this.state.currentPage} handleNavClick={this.handleNavClick}/>
-        <div className="main-body">
-          < BodyContainer currentPage={this.state.currentPage}/>
-        </div>
+      <div className="App">
+        < Nav currentPage={this.state.currentPage} handleNavClick={this.handleNavClick}/>
+        < BodyContainer currentPage={this.state.currentPage}/>
       </div>
     );
   }
