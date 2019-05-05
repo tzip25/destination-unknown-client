@@ -11,6 +11,8 @@ const Flight = (props) => {
     })
     .then(res=>res.json())
     .then(console.log)
+
+    window.open(flight.booking_url)
   }
 
   return(

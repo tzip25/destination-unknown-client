@@ -38,9 +38,9 @@ class SavedFlights extends React.Component {
     return(
       <div>
         <h1>Upcoming Flights</h1>
-          {this.renderflights(this.upcomingFlights())}
+          {this.upcomingFlights().length != 0 ? this.renderflights(this.upcomingFlights()): <h2>No Upcoming Flights</h2>}
         <h1>Past Flights</h1>
-          {this.renderflights(this.pastFlights())}
+          {this.pastFlights().length != 0 ? this.renderflights(this.pastFlights()): <h2>No Past Flights</h2>}
       </div>
     )
   }
