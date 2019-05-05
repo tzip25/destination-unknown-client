@@ -46,7 +46,10 @@ class BookFlightForm extends React.Component {
         <div className="three fields">
           <div className="field">
             <label>Departure City</label>
-            <input onChange={this.handleChange} value={this.state.departure} name={"departure"} placeholder="Departure City" />
+            <div className="ui disabled icon input">
+              <i className="paper plane icon"></i>
+              <input onChange={this.handleChange} value={this.state.departure} name={"departure"} placeholder="Departure City" />
+            </div>
           </div>
           <div className="field">
             <label>Departure Date</label>
@@ -54,7 +57,10 @@ class BookFlightForm extends React.Component {
           </div>
           <div className="field">
             <label>Max Budget</label>
-            <input type="number" onChange={this.handleChange} value={this.state.budget} name={"budget"} placeholder="Budget" />
+            <div className="ui disabled icon input">
+              <i className="dollar icon"></i>
+              <input type="number" onChange={this.handleChange} value={this.state.budget} name={"budget"} placeholder="Budget" />
+            </div>
           </div>
         </div>
           <button id="searchflight-button" className="ui button yellow">Find a Destination!</button>
