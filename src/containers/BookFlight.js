@@ -17,7 +17,7 @@ class BookFlight extends React.Component {
         <div className="header">No Matching Flights. Try Increasing your budget!</div>
     </div>
     } else if (this.props.flights[0] === "default") {
-      return null
+      return <div className="whereto">Adventure awaits...</div>
     } else {
       return (
         <div>
