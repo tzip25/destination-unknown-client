@@ -17,33 +17,30 @@ const Flight = (props) => {
 
   const currencySymbol = () => flight.currency === "USD" ? "$" : "€"
 
-  console.log(flight)
   return(
-    <div className="ui clearing segments">
-      <table className="ui blue table">
+      <div className="ui clearing segments flight-table">
+      <table className="ui blue large table">
         <thead>
           <tr>
-            <th>Airline</th>
-            <th>Departure City / Airport</th>
-            <th>Departure Date/Time</th>
-            <th>Arrival Airport</th>
-            <th>Arrival Date/Time</th>
             <th>Price</th>
+            <th></th>
+            <th>Route</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            {props.button ? <th></th> : null }
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{flight.airline}</td>
-            <td>{flight.start_location} <br/> {flight.start_airport}</td>
-            <td>{new Date(`${flight.departure_date} EDT`).toDateString()} <br/> {flight.departure_time}</td>
-            <td>{flight.end_location} <br/> {flight.end_airport}</td>
-            <td>{new Date(`${flight.arrival_date} EDT`).toDateString()} <br/> {flight.arrival_time}</td>
-            <td>{currencySymbol()}{flight.price}</td>
+            <td className="flight-price">{currencySymbol()}{flight.price}</td>
+            <td><img src={flight.airline_logo} width="35"/></td>
+            <td>{flight.start_location} ({flight.start_airport}) → {flight.end_location} ({flight.end_airport})
+            <br/>
+            <span id="small-flight-text">{flight.airline}</span></td>
+            <td>{flight.departure_time}<br/><span id="small-flight-text">{new Date(`${flight.departure_date} EDT`).toDateString()}</span></td>
+            <td>{flight.arrival_time}<br/><span id="small-flight-text">{new Date(`${flight.arrival_date} EDT`).toDateString()}</span></td>
+            {props.button ? <td><div className="ui right floated button blue" onClick={handleClick}>Book Flight</div></td> : null}
           </tr>
-          {props.button ? <tr>
-          <td colSpan="6">
-          <div className="ui right floated button orange" onClick={handleClick}>Book Flight</div></td>
-          </tr> : null}
         </tbody>
       </table>
     </div>
