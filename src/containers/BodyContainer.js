@@ -12,7 +12,6 @@ class BodyContainer extends React.Component {
   }
 
   handleSort = (sortOption) => {
-      console.log("in handle sort");
       switch(sortOption){
         case "Price: Low to High":
           return this.sortPriceLowToHigh()
@@ -38,23 +37,23 @@ class BodyContainer extends React.Component {
     })
   }
 
-  // sortDepartureTime = () => {
-  //   const sortedFlights = [...this.state.flights].sort((a,b) => {
-  //     return b.departure_time - a.departure_time
-  //   })
-  //   this.setState({
-  //     flights: sortedFlights
-  //   })
-  // }
-  //
-  // sortArrivalTime = () => {
-  //   const sortedFlights = [...this.state.flights].sort((a,b) => {
-  //     return b.arrival_time - a.arrival_time
-  //   })
-  //   this.setState({
-  //     flights: sortedFlights
-  //   })
-  // }
+  sortDepartureTime = () => {
+    const sortedFlights = [...this.state.flights].sort((a,b) => {
+      return a.unx_dtime - b.unx_dtime
+    })
+    this.setState({
+      flights: sortedFlights
+    })
+  }
+  
+  sortArrivalTime = () => {
+    const sortedFlights = [...this.state.flights].sort((a,b) => {
+      return a.unx_atime - b.unx_atime
+    })
+    this.setState({
+      flights: sortedFlights
+    })
+  }
 
   sortPriceHighToLow = () => {
     const sortedFlights = [...this.state.flights].sort((a,b) => {
