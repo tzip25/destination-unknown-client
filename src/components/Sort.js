@@ -15,7 +15,6 @@ class Sort extends React.Component {
   }
 
   render(){
-    console.log(this.state);
     return(
       <div id="sort-dropdown">
       <span id="sortby-text">Sort By</span>

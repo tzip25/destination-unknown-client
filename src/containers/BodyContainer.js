@@ -106,7 +106,7 @@ class BodyContainer extends React.Component {
     fetch('http://localhost:3000/flightsSearch', {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({start_location: formData.departure, date: formData.date, price: formData.budget})
+      body: JSON.stringify({start_location: formData.departure, date: formData.date, price: formData.budget, currency: formData.currency})
     })
     .then(res=>res.json())
     .then(flights => {

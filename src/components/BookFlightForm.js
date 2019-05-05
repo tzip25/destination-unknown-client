@@ -5,7 +5,8 @@ class BookFlightForm extends React.Component {
   state = {
     departure: "",
     date: "",
-    budget: ""
+    budget: "",
+    currency: "USD"
   }
 
   handleChange = (e) => {
@@ -21,6 +22,12 @@ class BookFlightForm extends React.Component {
     })
   }
 
+  setCurrency = (e) => {
+    this.setState({
+      currency: e.target.value
+    })
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.handleSearchFlight(this.state)
@@ -29,6 +36,13 @@ class BookFlightForm extends React.Component {
   render(){
     return(
       <form onSubmit={this.handleSubmit} className="ui form" id="search-form" >
+        <div id="currency-dropdown" className="field">
+          <select className="ui search dropdown" onChange={this.setCurrency}>
+            <option value="USD">USD $</option>
+            <option value="EUR">EUR €</option>
+          </select>
+        </div>
+
         <div className="three fields">
           <div className="field">
             <label>Departure City</label>
