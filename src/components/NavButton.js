@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class NavButton extends React.Component {
 
@@ -8,10 +8,12 @@ class NavButton extends React.Component {
 
   render(){
     return(
-      <div id="nav-link" className={this.menuClass()} onClick={this.handleClick} >
-      <i className={this.props.icon}></i>
-      {this.props.buttonName}
-      </div>
+      <Link to={this.props.path}>
+        <div id="nav-link" className={this.menuClass()} onClick={this.handleClick} >
+        <i className={this.props.icon}></i>
+        {this.props.buttonName}
+        </div>
+      </Link>
     )
   }
 }

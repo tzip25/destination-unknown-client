@@ -1,3 +1,14 @@
+/* #home-page {
+  background-image: url("/plane.jpg");
+} */
+
+.whereto {
+  text-align: center;
+  color: lightgray;
+  padding-top: 5%;
+  font-size: 5em;
+}
+
 .main-body {
   text-align: left;
   margin: auto;

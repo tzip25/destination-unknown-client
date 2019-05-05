@@ -1,8 +1,9 @@
 import React from "react";
-// import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Profile from './Profile'
 import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
+// import Home from './Home'
 
 class BodyContainer extends React.Component {
 
@@ -74,33 +75,37 @@ class BodyContainer extends React.Component {
     })
   }
 
-
   renderCurrentPage = () => {
-    // return <Switch>
-    //   <Route path='/profile' render={(props) => < Profile {...props}/>} />
-    //   <Route path='/newflight' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.state.flights} handleSort={this.handleSort} />} />
-    //   <Route path='/myflights' render={() => < SavedFlights />} />
-    // </Switch>
-    switch(this.props.currentPage){
-      case "View my Profile":
-        return < Profile />
-      case "Book a Flight":
-        return < BookFlight
-        handleSearchFlight={this.handleSearchFlight}
-        flights={this.state.invalid ? "invalid" : this.state.flights}
-        handleSort={this.handleSort}
-        />
-      case "My Flights":
-        return < SavedFlights />
-      default:
-        return < SavedFlights />
-    }
+    return <Switch>
+      <Route exact path='/' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.state.flights} handleSort={this.handleSort} />} />
+      <Route path='/profile' render={() => < Profile />} />
+      <Route path='/search-flights' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.state.flights} handleSort={this.handleSort} />} />
+      <Route path='/myflights' render={() => < SavedFlights />} />
+    </Switch>
+    // switch(this.props.currentPage){
+    //   case "View my Profile":
+    //     return < Profile />
+    //   case "Book a Flight":
+    //     return < BookFlight
+    //     handleSearchFlight={this.handleSearchFlight}
+    //     flights={this.state.invalid ? "invalid" : this.state.flights}
+    //     handleSort={this.handleSort}
+    //     />
+    //   case "My Flights":
+    //     return < SavedFlights />
+    //   default:
+    //     return < BookFlight
+    //     handleSearchFlight={this.handleSearchFlight}
+    //     flights={this.state.invalid ? "invalid" : this.state.flights}
+    //     handleSort={this.handleSort}
+    //     />
+    // }
   }
 
   renderLoadingScreen = () => {
     return(
       <div className="ui active inverted dimmer">
-        <div id="loading-text" className="ui text loader">Finding You Amazing Adventures!</div>
+        <div id="loading-text" className="ui text loader">Finding You Amazing Destinations!</div>
       </div>
     )
   }
