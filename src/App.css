@@ -9,6 +9,10 @@
   color: white;
 }
 
+#currency-dropdown {
+  width: 75px;
+}
+
 #search-form {
   margin-bottom: 2%
 }

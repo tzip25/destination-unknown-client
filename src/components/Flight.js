@@ -13,6 +13,9 @@ const Flight = (props) => {
     .then(console.log)
   }
 
+  const currencySymbol = () => flight.currency === "USD" ? "$" : "€"
+
+  console.log(flight)
   return(
     <div className="ui clearing segments">
       <table className="ui blue table">
@@ -33,7 +36,7 @@ const Flight = (props) => {
             <td>{new Date(`${flight.departure_date} EDT`).toDateString()} <br/> {flight.departure_time}</td>
             <td>{flight.end_location} <br/> {flight.end_airport}</td>
             <td>{new Date(`${flight.arrival_date} EDT`).toDateString()} <br/> {flight.arrival_time}</td>
-            <td>${flight.price}</td>
+            <td>{currencySymbol()}{flight.price}</td>
           </tr>
           {props.button ? <tr>
           <td colSpan="6">
