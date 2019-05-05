@@ -19,14 +19,20 @@ class SavedFlights extends React.Component {
   }
 
   upcomingFlights = () => {
-    return this.state.flights.filter(flight => {
+    const upcomingFlights = this.state.flights.filter(flight => {
       return new Date(flight.departure_date) > new Date()
+    })
+    return upcomingFlights.sort((a,b) => {
+      return new Date(a.departure_date) - new Date(b.departure_date)
     })
   }
 
   pastFlights = () => {
-    return this.state.flights.filter(flight => {
+    const pastFlights = this.state.flights.filter(flight => {
       return new Date(flight.departure_date) < new Date()
+    })
+    return pastFlights.sort((a,b) => {
+      return new Date(a.departure_date) - new Date(b.departure_date)
     })
   }
 
@@ -38,9 +44,9 @@ class SavedFlights extends React.Component {
     return(
       <div>
         <h1>Upcoming Flights</h1>
-          {this.upcomingFlights().length !== 0 ? this.renderflights(this.upcomingFlights()): <h2>No Upcoming Flights</h2>}
+          {this.upcomingFlights().length !== 0 ? this.renderflights(this.upcomingFlights()): <h3>No Upcoming Flights</h3>}
         <h1>Past Flights</h1>
-          {this.pastFlights().length !== 0 ? this.renderflights(this.pastFlights()): <h2>No Past Flights</h2>}
+          {this.pastFlights().length !== 0 ? this.renderflights(this.pastFlights()): <h3>No Past Flights</h3>}
       </div>
     )
   }
