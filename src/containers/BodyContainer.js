@@ -80,7 +80,7 @@ class BodyContainer extends React.Component {
       <Route exact path='/' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.state.flights} handleSort={this.handleSort} />} />
       <Route path='/profile' render={() => < Profile />} />
       <Route path='/search-flights' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.state.flights} handleSort={this.handleSort} />} />
-      <Route path='/myflights' render={() => < SavedFlights />} />
+      <Route path='/my-flights' render={() => < SavedFlights />} />
     </Switch>
     // switch(this.props.currentPage){
     //   case "View my Profile":
