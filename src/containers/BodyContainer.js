@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Profile from './Profile'
 import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
+import MoreFlightsButton from '../components/MoreFlightsButton'
 // import Home from './Home'
 
 class BodyContainer extends React.Component {
@@ -10,7 +11,8 @@ class BodyContainer extends React.Component {
   state = {
     flights: ["default"],
     invalid: false,
-    isLoading: false
+    isLoading: false,
+    index: 0
   }
 
   handleSort = (sortOption) => {
@@ -35,7 +37,8 @@ class BodyContainer extends React.Component {
       return a.end_location.localeCompare(b.end_location)
     })
     this.setState({
-      flights: sortedFlights
+      flights: sortedFlights,
+      index: 0
     })
   }
 
@@ -44,7 +47,8 @@ class BodyContainer extends React.Component {
       return a.unx_dtime - b.unx_dtime
     })
     this.setState({
-      flights: sortedFlights
+      flights: sortedFlights,
+      index: 0
     })
   }
 
@@ -53,7 +57,8 @@ class BodyContainer extends React.Component {
       return a.unx_atime - b.unx_atime
     })
     this.setState({
-      flights: sortedFlights
+      flights: sortedFlights,
+      index: 0
     })
   }
 
@@ -62,7 +67,8 @@ class BodyContainer extends React.Component {
       return b.price - a.price
     })
     this.setState({
-      flights: sortedFlights
+      flights: sortedFlights,
+      index: 0
     })
   }
 
@@ -71,15 +77,61 @@ class BodyContainer extends React.Component {
       return a.price - b.price
     })
     this.setState({
-      flights: sortedFlights
+      flights: sortedFlights,
+      index: 0
     })
+  }
+
+  nextTenFlights = () => {
+    console.log("current index", this.state.index)
+    console.log("flight length", this.state.flights.length)
+    if (this.state.index + 10 >= this.state.flights.length) {
+      return null
+    } else {
+      this.setState( prevState => {
+        return {
+          index: prevState.index + 10
+        }
+      }, () => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0
+      })
+    }
+  }
+
+  previousTenFlights = () => {
+    if (this.state.index <= 0) {
+      return null
+    } else {
+      this.setState( prevState => {
+        return {
+          index: prevState.index - 10
+        }
+      }, () => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0
+      })
+    }
+  }
+
+  firstTenFlights = () => {
+    this.setState({
+      index: 0
+    }, () => {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0
+    })
+  }
+
+  renderTenFlights = () => {
+    return this.state.flights.slice(this.state.index, this.state.index + 10)
   }
 
   renderCurrentPage = () => {
     return <Switch>
-      <Route exact path='/' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.state.flights} handleSort={this.handleSort} />} />
+      <Route exact path='/' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.renderTenFlights()} handleSort={this.handleSort} />} />
       <Route path='/profile' render={() => < Profile />} />
-      <Route path='/search-flights' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.state.flights} handleSort={this.handleSort} />} />
+      <Route path='/search-flights' render={() => < BookFlight handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.renderTenFlights()} handleSort={this.handleSort} />} />
       <Route path='/my-flights' render={() => < SavedFlights />} />
     </Switch>
     // switch(this.props.currentPage){
@@ -141,6 +193,7 @@ class BodyContainer extends React.Component {
     return(
       <div className="main-body">
       {this.state.isLoading ? this.renderLoadingScreen(): this.renderCurrentPage()}
+      {this.state.flights[0] === "default" ? null : <MoreFlightsButton nextTenFlights={this.nextTenFlights} previousTenFlights={this.previousTenFlights} firstTenFlights={this.firstTenFlights}/>}
       </div>
     )
   }

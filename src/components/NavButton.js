@@ -8,12 +8,12 @@ class NavButton extends React.Component {
 
   render(){
     return(
-      <div id="nav-link" className={this.menuClass()} onClick={this.handleClick} >
-        <Link to={this.props.path}>
-        <i className={this.props.icon}></i>
-        {this.props.buttonName}
-        </Link>
-      </div>
+      <Link to={this.props.path}>
+        <div id="nav-link" className={this.menuClass()} onClick={this.handleClick} >
+          <i className={this.props.icon}></i>
+          {this.props.buttonName}
+        </div>
+      </Link>
     )
   }
 }
