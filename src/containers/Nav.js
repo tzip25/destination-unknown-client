@@ -4,7 +4,7 @@ import NavButton from '../components/NavButton'
 class Nav extends React.Component {
   render(){
     return(
-        <div className="ui inverted secondary pointing blue menu">
+        <div className="ui inverted pointing blue menu">
           <img className="item" src="./logo3.png" width="350px" alt="destination unknown logo"/>
           < NavButton
             currentPage={this.props.currentPage}

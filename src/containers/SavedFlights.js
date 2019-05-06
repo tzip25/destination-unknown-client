@@ -32,7 +32,7 @@ class SavedFlights extends React.Component {
       return new Date(flight.departure_date) < new Date()
     })
     return pastFlights.sort((a,b) => {
-      return new Date(a.departure_date) - new Date(b.departure_date)
+      return new Date(b.departure_date) - new Date(a.departure_date)
     })
   }
 
