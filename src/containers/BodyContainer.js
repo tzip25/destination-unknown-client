@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Profile from './Profile'
 import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
+import Login from './Login'
 // import Home from './Home'
 
 class BodyContainer extends React.Component {
@@ -131,6 +132,7 @@ class BodyContainer extends React.Component {
       <Route path='/profile' render={() => < Profile />} />
       <Route path='/search-flights' render={() => bookFlightComponent} />
       <Route path='/my-flights' render={() => < SavedFlights />} />
+      <Route path='/login' render={() => < Login setCurrentUser={this.props.setCurrentUser}/>} />
     </Switch>
     // switch(this.props.currentPage){
     //   case "View my Profile":

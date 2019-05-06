@@ -8,7 +8,8 @@ import BodyContainer from './containers/BodyContainer'
 class App extends React.Component {
 
   state = {
-    currentPage: ""
+    currentPage: "",
+    currentUser: null
   }
 
   handleNavClick = (buttonName) => {
@@ -17,11 +18,43 @@ class App extends React.Component {
     })
   }
 
+  setCurrentUser = (response) => {
+    this.setState({
+      currentUser: response.user
+    }, () => {
+      localStorage.setItem("token", response.token)
+      this.props.history.push('/profile')
+    })
+  }
+
+  componentDidMount(){
+		const token = localStorage.getItem("token")
+
+		if (token){
+			fetch("http://localhost:3000/auto_login", {
+				headers: {
+					"Authorization": token
+				}
+			})
+			.then(res => res.json())
+			.then((response) => {
+				if (response.errors) {
+					alert(response.errors)
+				} else {
+					this.setState({
+						currentUser: response
+					})
+				}
+			})
+		}
+	}
+
   render(){
+    console.log(this.state.currentUser)
     return (
       <div className="App">
-        < Nav currentPage={this.state.currentPage} handleNavClick={this.handleNavClick}/>
-        < BodyContainer currentPage={this.state.currentPage}/>
+        < Nav currentUser={this.state.currentUser}  currentPage={this.state.currentPage} handleNavClick={this.handleNavClick}/>
+        < BodyContainer setCurrentUser={this.setCurrentUser} currentPage={this.state.currentPage}/>
       </div>
     );
   }

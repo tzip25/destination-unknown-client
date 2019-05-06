@@ -12,9 +12,13 @@ class SavedFlights extends React.Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:3000/flights')
+    const token = localStorage.getItem("token")
+    fetch('http://localhost:3000/flights', {
+    headers: {"Authorization": token}
+    })
     .then(res=>res.json())
     .then(flights => {
+      console.log(flights)
       this.setState({
         flights: flights
       })
@@ -71,6 +75,7 @@ class SavedFlights extends React.Component {
   }
 
   render(){
+    console.log(this.state.flights)
     return(
       <div>
           <UpcomingFlights flights={this.upcomingFlights().slice(this.state.upcomingIndex, this.state.upcomingIndex + 3)} nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights}/>
