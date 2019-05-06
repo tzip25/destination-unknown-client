@@ -1,11 +1,16 @@
 import React from "react";
 import Flight from '../components/Flight'
 import v4 from 'uuid'
+import PastFlights from '../components/PastFlights'
+import UpcomingFlights from '../components/UpcomingFlights'
+
 
 class SavedFlights extends React.Component {
 
   state = {
-    flights: []
+    flights: [],
+    upcomingIndex: 0,
+    pastIndex: 0
   }
 
   componentDidMount(){
@@ -19,6 +24,7 @@ class SavedFlights extends React.Component {
   }
 
   upcomingFlights = () => {
+
     const upcomingFlights = this.state.flights.filter(flight => {
       return new Date(flight.departure_date) > new Date()
     })
@@ -36,17 +42,41 @@ class SavedFlights extends React.Component {
     })
   }
 
-  renderflights = (flights) => {
-    return flights.map(flight => < Flight key={v4()} flight={flight}/>)
+  nextFlights = (tense, funcName) => {
+    if (this.state[tense] + 3 >= this[funcName]().length) {
+      return null
+    } else {
+      this.setState( prevState => {
+        return {
+        [tense]: prevState[tense] + 3
+        }
+      })
+    }
+  }
+
+  previousFlights = (tense) => {
+    if (this.state[tense] <= 0) {
+      return null
+    } else {
+      this.setState( prevState => {
+        return {
+          [tense]: prevState[tense] - 3
+        }
+      })
+    }
+  }
+
+  firstFlights = (tense) => {
+    this.setState({
+      [tense]: 0
+    })
   }
 
   render(){
     return(
       <div>
-        <h1>Upcoming Flights</h1>
-          {this.upcomingFlights().length !== 0 ? this.renderflights(this.upcomingFlights()): <h3>No Upcoming Flights</h3>}
-        <h1>Past Flights</h1>
-          {this.pastFlights().length !== 0 ? this.renderflights(this.pastFlights()): <h3>No Past Flights</h3>}
+          <UpcomingFlights flights={this.upcomingFlights().slice(this.state.upcomingIndex, this.state.upcomingIndex + 3)} nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights}/>
+          <PastFlights flights={this.pastFlights().slice(this.state.pastIndex, this.state.pastIndex + 3)} nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights}/>
       </div>
     )
   }

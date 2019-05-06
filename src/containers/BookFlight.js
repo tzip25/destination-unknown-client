@@ -2,6 +2,8 @@ import React from "react";
 import BookFlightForm from '../components/BookFlightForm'
 import Flight from '../components/Flight'
 import Sort from '../components/Sort'
+import MoreFlightsButton from '../components/MoreFlightsButton'
+
 
 import v4 from 'uuid'
 
@@ -33,6 +35,7 @@ class BookFlight extends React.Component {
       <div>
         < BookFlightForm handleSearchFlight={this.props.handleSearchFlight}/>
         {this.renderflights()}
+        {this.props.flights[0] === "default" ? null : <MoreFlightsButton nextTenFlights={this.props.nextTenFlights} previousTenFlights={this.props.previousTenFlights} firstTenFlights={this.props.firstTenFlights}/>}
       </div>
     )
   }
