@@ -81,7 +81,7 @@ class BodyContainer extends React.Component {
     })
   }
 
-  nextTenFlights = () => {
+  nextFlights = () => {
     if (this.state.index + 10 >= this.state.flights.length) {
       return null
     } else {

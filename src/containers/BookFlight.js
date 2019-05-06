@@ -35,7 +35,7 @@ class BookFlight extends React.Component {
       <div>
         < BookFlightForm handleSearchFlight={this.props.handleSearchFlight}/>
         {this.renderflights()}
-        {this.props.flights[0] === "default" ? null : <MoreFlightsButton nextTenFlights={this.props.nextTenFlights} previousTenFlights={this.props.previousTenFlights} firstTenFlights={this.props.firstTenFlights}/>}
+        {this.props.flights[0] === "default" ? null : <MoreFlightsButton nextFlights={this.props.nextFlights} previousFlights={this.props.previousFlights} firstFlights={this.props.firstFlights}/>}
       </div>
     )
   }

@@ -1,6 +1,4 @@
 import React from "react";
-import Flight from '../components/Flight'
-import v4 from 'uuid'
 import PastFlights from '../components/PastFlights'
 import UpcomingFlights from '../components/UpcomingFlights'
 
