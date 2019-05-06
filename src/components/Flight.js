@@ -4,14 +4,13 @@ const Flight = (props) => {
 
   const {flight} = props
   const handleClick = () => {
+    const token = localStorage.getItem("token")
     fetch('http://localhost:3000/flights', {
       method: 'POST',
-      headers: {"Content-Type": "application/json"},
+      headers: {"Content-Type": "application/json", "Authorization": token},
       body: JSON.stringify(flight)
     })
-    .then(res=>res.json())
-    .then(console.log)
-
+    
     window.open(flight.booking_url)
   }
 
