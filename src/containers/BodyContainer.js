@@ -129,7 +129,7 @@ class BodyContainer extends React.Component {
     const bookFlightComponent = < BookFlight nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights} handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.renderFlights()} handleSort={this.handleSort} />
     return <Switch>
       <Route exact path='/' render={() => bookFlightComponent} />
-      <Route path='/profile' render={() => < Profile />} />
+      <Route path='/profile' render={(routeProps) => < Profile {...routeProps}/>} />
       <Route path='/search-flights' render={() => bookFlightComponent} />
       <Route path='/my-flights' render={() => < SavedFlights />} />
       <Route path='/login' render={() => < Login setCurrentUser={this.props.setCurrentUser}/>} />

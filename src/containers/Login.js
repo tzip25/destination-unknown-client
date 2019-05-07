@@ -3,12 +3,12 @@ import React from "react";
 class Login extends React.Component {
 
   state = {
-    login: 
+    login:
       {
         loginUsername: '',
         loginPassword: ''
       },
-    signup: 
+    signup:
       {
       signupName: '',
       signupUsername: '',
@@ -20,7 +20,7 @@ class Login extends React.Component {
   handleLoginChange = (e) => {
     this.setState({
       login: {
-        ...this.state.login, 
+        ...this.state.login,
         [e.target.name]: e.target.value
       }
     })
@@ -29,7 +29,7 @@ class Login extends React.Component {
   handleSignupChange = (e) => {
     this.setState({
       signup: {
-        ...this.state.signup, 
+        ...this.state.signup,
         [e.target.name]: e.target.value
       }
     })
@@ -37,7 +37,6 @@ class Login extends React.Component {
 
   createUser = (e) => {
     e.preventDefault()
-    console.log("hi")
     if (this.state.signupPassword === this.state.signupConfirmPassword) {
       fetch(`http://localhost:3000/signup`, {
         method: 'POST',
@@ -48,7 +47,6 @@ class Login extends React.Component {
       })
       .then(res => res.json())
       .then((response) => {
-        // console.log(response)
         if (response.errors){
           alert(response.errors)
         } else {
@@ -57,7 +55,7 @@ class Login extends React.Component {
       })
     } else {
       alert("passwords don't match")
-    } 
+    }
   }
 
   login = (e) => {
@@ -71,7 +69,6 @@ class Login extends React.Component {
     })
     .then(res => res.json())
     .then((response) => {
-      console.log(response)
       if (response.errors){
         alert(response.errors)
       } else {
@@ -81,7 +78,6 @@ class Login extends React.Component {
   }
 
   render(){
-    // console.log(this.state.signup)
     return(
       <div>
         <form onSubmit={this.login}>

@@ -3,14 +3,17 @@ import React from "react";
 const Flight = (props) => {
 
   const {flight} = props
+
+  // booking/saving ticket function
   const handleClick = () => {
     const token = localStorage.getItem("token")
-    fetch('http://localhost:3000/flights', {
-      method: 'POST',
-      headers: {"Content-Type": "application/json", "Authorization": token},
-      body: JSON.stringify(flight)
-    })
-    
+    if(token){
+      fetch('http://localhost:3000/flights', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json", "Authorization": token},
+        body: JSON.stringify(flight)
+      })
+    }
     window.open(flight.booking_url)
   }
 
