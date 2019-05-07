@@ -1,5 +1,5 @@
 import React from "react";
-// const airports = require('airport-data')
+const airports = require('airport-data')
 
 class BookFlightForm extends React.Component {
 
@@ -35,7 +35,7 @@ class BookFlightForm extends React.Component {
   }
 
   render(){
-    // console.log(airports)
+    console.log(airports)
     return(
       <form onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div id="currency-dropdown" className="field">

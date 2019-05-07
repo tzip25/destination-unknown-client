@@ -6,17 +6,17 @@ class Login extends React.Component {
     login:
       {
         loginUsername: '',
-        loginPassword: ''
+        loginPassword: '',
+        loginErrors: null,
       },
     signup:
       {
         signupName: '',
         signupUsername: '',
         signupPassword: '',
-        signupConfirmPassword: ''
+        signupConfirmPassword: '',
+        signupErrors: null
       },
-    loginErrors: null,
-    signupErrors: null
   }
 
   handleLoginChange = (e) => {
@@ -50,6 +50,7 @@ class Login extends React.Component {
       .then((response) => {
         if (response.errors){
           this.setState({
+            ...this.state.signup,
             signupErrors: response.errors
           })
         } else {
@@ -58,6 +59,7 @@ class Login extends React.Component {
       })
     } else {
       this.setState({
+        ...this.state.signup,
         signupErrors: "Passwords don't match"
       })
     }
@@ -76,6 +78,7 @@ class Login extends React.Component {
     .then((response) => {
       if (response.errors){
         this.setState({
+          ...this.state.login,
           loginErrors: response.errors
         })
       } else {
