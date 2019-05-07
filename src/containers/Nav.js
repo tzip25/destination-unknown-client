@@ -7,7 +7,7 @@ class Nav extends React.Component {
   loggedIn = () => {
     if(this.props.currentUser){
       return(
-        <>
+        <div className="right menu">
         < NavButton
           buttonName={"My Flights"}
           icon={"calendar icon"}
@@ -26,15 +26,17 @@ class Nav extends React.Component {
             Logout
           </div>
         </Link>
-        </>
+        </div>
       )
     } else {
       return (
+          <div className="right menu">
           < NavButton
             buttonName={"Login / Signup"}
             icon={"user icon"}
             path={"/login"}
           />
+          </div>
       )
     }
   }
@@ -42,8 +44,9 @@ class Nav extends React.Component {
   render()
   {
     return(
+      <div>
         <div className="ui inverted secondary pointing blue menu">
-          <img className="item" src="./logo3.png" width="350px" alt="destination unknown logo"/>
+        <img className="logo" src="./logo3.png" width="355px" alt="destination unknown logo"/>
           < NavButton
             buttonName={"Book a Flight"}
             icon={"paper plane icon"}
@@ -51,6 +54,7 @@ class Nav extends React.Component {
           />
           {this.loggedIn()}
         </div>
+      </div>
     )
   }
 }

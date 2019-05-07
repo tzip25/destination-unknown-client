@@ -27,6 +27,11 @@
   width: 400px;
 }
 
+.logo {
+  padding: 0px 10px;
+  float: left;
+}
+
 #nav-link {
   color: white;
 }
