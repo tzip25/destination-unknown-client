@@ -1,35 +1,51 @@
 import React from "react";
 import NavButton from '../components/NavButton'
+import { Link } from 'react-router-dom'
 
 class Nav extends React.Component {
+
+  loggedIn = () => {
+    if(this.props.currentUser){
+      return(
+        <>
+        < NavButton
+        buttonName={"My Flights"}
+        icon={"calendar icon"}
+        path={"/my-flights"}
+        />
+        < NavButton
+          buttonName={"View my Profile"}
+          icon={"user icon"}
+          path={"/profile"}
+        />
+        <Link to="/login">
+          <div onClick={this.props.logOut} id="nav-link" className={"item"} >
+          Logout
+          </div>
+        </Link>
+        </>
+      )
+    } else {
+      return (< NavButton
+        buttonName={"Login/Signup"}
+        icon={"user icon"}
+        path={"/login"}
+      />
+      )
+    }
+  }
+
   render()
   {
     return(
         <div className="ui inverted pointing blue menu">
           <img className="item" src="./logo3.png" width="350px" alt="destination unknown logo"/>
-          {this.props.currentUser ? < NavButton
-            currentPage={this.props.currentPage}
-            buttonName={"View my Profile"}
-            handleNavClick={this.props.handleNavClick}
-            icon={"user icon"} path={"/profile"}
-          /> : < NavButton
-          currentPage={this.props.currentPage}
-          buttonName={"Login/Signup"}
-          handleNavClick={this.props.handleNavClick}
-          icon={"user icon"} path={"/login"}
-        />}
           < NavButton
-            currentPage={this.props.currentPage}
             buttonName={"Book a Flight"}
-            handleNavClick={this.props.handleNavClick}
-            icon={"paper plane icon"} path={"/search-flights"}
+            icon={"paper plane icon"}
+            path={"/search-flights"}
           />
-          {this.props.currentUser ? < NavButton
-            currentPage={this.props.currentPage}
-            buttonName={"My Flights"}
-            handleNavClick={this.props.handleNavClick}
-            icon={"calendar icon"} path={"/my-flights"}
-          />: null }
+          {this.loggedIn()}
         </div>
     )
   }

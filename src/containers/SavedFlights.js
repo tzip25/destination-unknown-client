@@ -18,7 +18,6 @@ class SavedFlights extends React.Component {
     })
     .then(res=>res.json())
     .then(flights => {
-      console.log(flights)
       this.setState({
         flights: flights
       })
@@ -75,7 +74,6 @@ class SavedFlights extends React.Component {
   }
 
   render(){
-    console.log(this.state.flights)
     return(
       <div>
           <UpcomingFlights flights={this.upcomingFlights().slice(this.state.upcomingIndex, this.state.upcomingIndex + 3)} nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights}/>

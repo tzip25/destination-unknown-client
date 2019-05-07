@@ -8,14 +8,7 @@ import BodyContainer from './containers/BodyContainer'
 class App extends React.Component {
 
   state = {
-    currentPage: "",
     currentUser: null
-  }
-
-  handleNavClick = (buttonName) => {
-    this.setState({
-      currentPage: buttonName
-    })
   }
 
   setCurrentUser = (response) => {
@@ -26,6 +19,15 @@ class App extends React.Component {
       this.props.history.push('/profile')
     })
   }
+
+  logOut = () => {
+		localStorage.removeItem("token")
+		this.setState({
+			currentUser: null
+		}, () => {
+			this.props.history.push("/login")
+		})
+	}
 
   componentDidMount(){
 		const token = localStorage.getItem("token")
@@ -50,10 +52,9 @@ class App extends React.Component {
 	}
 
   render(){
-    console.log(this.state.currentUser)
     return (
       <div className="App">
-        < Nav currentUser={this.state.currentUser}  currentPage={this.state.currentPage} handleNavClick={this.handleNavClick}/>
+        < Nav currentUser={this.state.currentUser} logOut={this.logOut} handleNavClick={this.handleNavClick}/>
         < BodyContainer setCurrentUser={this.setCurrentUser} currentPage={this.state.currentPage}/>
       </div>
     );
