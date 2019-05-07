@@ -1,13 +1,15 @@
 import React from "react";
-const airports = require('airport-data')
+// const airports = require('airport-data')
 
 class BookFlightForm extends React.Component {
 
   state = {
     departure: "",
     date: "",
+    returnDate: "",
     budget: "",
-    currency: "USD"
+    currency: "USD",
+    roundTrip: false
   }
 
   handleChange = (e) => {
@@ -19,7 +21,7 @@ class BookFlightForm extends React.Component {
   handleDateChange = (e) => {
     let dateArr = e.target.value.split('-').reverse()
     this.setState({
-      date: dateArr.join('/')
+      [e.target.name]: dateArr.join('/')
     })
   }
 
@@ -29,19 +31,35 @@ class BookFlightForm extends React.Component {
     })
   }
 
+  setRoundTrip = () => {
+    this.setState(prevState => {
+      return {
+        roundTrip: !prevState.roundTrip
+      }
+    })
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.handleSearchFlight(this.state)
   }
 
   render(){
-    console.log(airports)
+    // console.log(airports)
+
     return(
       <form onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div id="currency-dropdown" className="field">
           <select className="ui search dropdown" onChange={this.setCurrency}>
             <option value="USD">USD $</option>
             <option value="EUR">EUR €</option>
+          </select>
+        </div>
+
+        <div id="roundTrip-dropdown" className="field">
+          <select className="ui search dropdown" onChange={this.setRoundTrip}>
+            <option>One Way</option>
+            <option>Round Trip</option>
           </select>
         </div>
 
@@ -57,6 +75,12 @@ class BookFlightForm extends React.Component {
             <label>Departure Date</label>
             <input type="date" onChange={this.handleDateChange} name={"date"} placeholder="Date" />
           </div>
+          {this.state.roundTrip && 
+          <div className="field">
+            <label>Arrival Date</label>
+            <input type="date" onChange={this.handleDateChange} name={"returnDate"} placeholder="Date" />
+          </div>
+          }
           <div className="field">
             <label>Max Budget</label>
             <div className="ui disabled icon input">

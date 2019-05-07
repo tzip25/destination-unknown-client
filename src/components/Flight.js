@@ -1,21 +1,10 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 const Flight = (props) => {
-
+  // console.log(props)
+  // debugger
   const {flight} = props
-
-  // booking/saving ticket function
-  const handleClick = () => {
-    const token = localStorage.getItem("token")
-    if(token){
-      fetch('http://localhost:3000/flights', {
-        method: 'POST',
-        headers: {"Content-Type": "application/json", "Authorization": token},
-        body: JSON.stringify(flight)
-      })
-    }
-    window.open(flight.booking_url)
-  }
 
   const currencySymbol = () => flight.currency === "USD" ? "$" : "€"
 
@@ -41,7 +30,7 @@ const Flight = (props) => {
             <span id="small-flight-text">{flight.airline}</span></td>
             <td>{flight.departure_time}<br/><span id="small-flight-text">{new Date(`${flight.departure_date} EDT`).toDateString()}</span></td>
             <td>{flight.arrival_time}<br/><span id="small-flight-text">{new Date(`${flight.arrival_date} EDT`).toDateString()}</span></td>
-            {props.button ? <td><div className="ui right floated button blue" onClick={handleClick}>Book Flight</div></td> : null}
+            {props.button ? <td><div className="ui right floated button blue" onClick={() => props.handleClick(flight)}>Book Flight</div></td> : null}
           </tr>
         </tbody>
       </table>
