@@ -39,16 +39,16 @@ class Login extends React.Component {
 
   createUser = (e) => {
     e.preventDefault()
-    if (this.state.signup.signupPassword === this.state.signup.signupConfirmPassword) {
+    const {signup} = this.state
+    if (signup.signupPassword === signup.signupConfirmPassword) {
       fetch(`http://localhost:3000/signup`, {
         method: 'POST',
-        body: JSON.stringify(this.state.signup),
+        body: JSON.stringify(signup),
         headers:{'Content-Type': 'application/json'}
       })
       .then(res => res.json())
       .then((response) => {
         if (response.errors){
-          // alert(response.errors)
           this.setState({
             signupErrors: response.errors
           })
@@ -57,9 +57,8 @@ class Login extends React.Component {
         }
       })
     } else {
-      // alert("passwords don't match")
       this.setState({
-        signupErrors: "passwords don't match"
+        signupErrors: "Passwords don't match"
       })
     }
   }
@@ -76,7 +75,6 @@ class Login extends React.Component {
     .then(res => res.json())
     .then((response) => {
       if (response.errors){
-        // alert(response.errors)
         this.setState({
           loginErrors: response.errors
         })
