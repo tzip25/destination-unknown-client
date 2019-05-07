@@ -9,28 +9,32 @@ class Nav extends React.Component {
       return(
         <>
         < NavButton
-        buttonName={"My Flights"}
-        icon={"calendar icon"}
-        path={"/my-flights"}
+          buttonName={"My Flights"}
+          icon={"calendar icon"}
+          path={"/my-flights"}
         />
         < NavButton
-          buttonName={"View my Profile"}
+          buttonName={"Profile"}
           icon={"user icon"}
           path={"/profile"}
         />
         <Link to="/login">
-          <div onClick={this.props.logOut} id="nav-link" className={"item"} >
-          Logout
+          <div
+            onClick={this.props.logOut}
+            id="nav-link"
+            className={"item"} >
+            Logout
           </div>
         </Link>
         </>
       )
     } else {
-      return (< NavButton
-        buttonName={"Login/Signup"}
-        icon={"user icon"}
-        path={"/login"}
-      />
+      return (
+          < NavButton
+            buttonName={"Login / Signup"}
+            icon={"user icon"}
+            path={"/login"}
+          />
       )
     }
   }
@@ -38,7 +42,7 @@ class Nav extends React.Component {
   render()
   {
     return(
-        <div className="ui inverted pointing blue menu">
+        <div className="ui inverted secondary pointing blue menu">
           <img className="item" src="./logo3.png" width="350px" alt="destination unknown logo"/>
           < NavButton
             buttonName={"Book a Flight"}
