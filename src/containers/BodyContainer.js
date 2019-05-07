@@ -134,24 +134,6 @@ class BodyContainer extends React.Component {
       <Route path='/my-flights' render={() => < SavedFlights />} />
       <Route path='/login' render={() => < Login setCurrentUser={this.props.setCurrentUser}/>} />
     </Switch>
-    // switch(this.props.currentPage){
-    //   case "View my Profile":
-    //     return < Profile />
-    //   case "Book a Flight":
-    //     return < BookFlight
-    //     handleSearchFlight={this.handleSearchFlight}
-    //     flights={this.state.invalid ? "invalid" : this.state.flights}
-    //     handleSort={this.handleSort}
-    //     />
-    //   case "My Flights":
-    //     return < SavedFlights />
-    //   default:
-    //     return < BookFlight
-    //     handleSearchFlight={this.handleSearchFlight}
-    //     flights={this.state.invalid ? "invalid" : this.state.flights}
-    //     handleSort={this.handleSort}
-    //     />
-    // }
   }
 
   renderLoadingScreen = () => {

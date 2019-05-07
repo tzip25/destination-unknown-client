@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 class NavButton extends React.Component {
 
-  menuClass = () => window.location.pathname === this.props.path ? "active item" : "item"
+  menuClass = () => window.location.pathname === this.props.path ? "item active" : "item"
 
   render(){
     return(
