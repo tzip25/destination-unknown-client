@@ -1,6 +1,7 @@
 import React from "react";
 import PastFlights from '../components/PastFlights'
 import UpcomingFlights from '../components/UpcomingFlights'
+import withAuth from '../HOC/withAuth'
 
 
 class SavedFlights extends React.Component {
@@ -83,4 +84,4 @@ class SavedFlights extends React.Component {
   }
 }
 
-export default SavedFlights
+export default withAuth(SavedFlights)
