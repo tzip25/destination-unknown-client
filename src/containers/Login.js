@@ -14,7 +14,9 @@ class Login extends React.Component {
         signupUsername: '',
         signupPassword: '',
         signupConfirmPassword: ''
-      }
+      },
+    loginErrors: null,
+    signupErrors: null
   }
 
   handleLoginChange = (e) => {
@@ -37,24 +39,28 @@ class Login extends React.Component {
 
   createUser = (e) => {
     e.preventDefault()
-    if (this.state.signupPassword === this.state.signupConfirmPassword) {
+    if (this.state.signup.signupPassword === this.state.signup.signupConfirmPassword) {
       fetch(`http://localhost:3000/signup`, {
         method: 'POST',
         body: JSON.stringify(this.state.signup),
-        headers:{
-          'Content-Type': 'application/json'
-        }
+        headers:{'Content-Type': 'application/json'}
       })
       .then(res => res.json())
       .then((response) => {
         if (response.errors){
-          alert(response.errors)
+          // alert(response.errors)
+          this.setState({
+            signupErrors: response.errors
+          })
         } else {
           this.props.setCurrentUser(response)
         }
       })
     } else {
-      alert("passwords don't match")
+      // alert("passwords don't match")
+      this.setState({
+        signupErrors: "passwords don't match"
+      })
     }
   }
 
@@ -70,7 +76,10 @@ class Login extends React.Component {
     .then(res => res.json())
     .then((response) => {
       if (response.errors){
-        alert(response.errors)
+        // alert(response.errors)
+        this.setState({
+          loginErrors: response.errors
+        })
       } else {
         this.props.setCurrentUser(response)
       }
@@ -86,26 +95,25 @@ class Login extends React.Component {
 
             <div className="column login-page-div">
               <h1>Login</h1>
-
               <div className="ui input">
                 <form className="ui form login-page-form" onSubmit={this.login}>
+                {this.state.loginErrors && <div className="field ui negative message">{this.state.loginErrors}</div> }
                   <div className="field">
                     <input name="loginUsername" onChange={this.handleLoginChange} placeholder="username"/>
                   </div>
                   <div className="field">
                     <input type="password" name="loginPassword" onChange={this.handleLoginChange} placeholder="password"/>
                   </div>
-                    <button className="ui button login-signup-buttons">Login</button>
+                    <button className="ui button yellow login-signup-buttons">Login</button>
                 </form>
               </div>
-
             </div>
 
             <div className="column login-page-div">
               <h1>Sign Up</h1>
-
               <div className="ui input">
                 <form className="ui form login-page-form" onSubmit={this.createUser}>
+                {this.state.signupErrors && <div className="field ui negative message">{this.state.signupErrors}</div>}
                   <div className="two fields">
                     <div className="field">
                       <input name="signupName" onChange={this.handleSignupChange} placeholder="name"/>
@@ -122,17 +130,14 @@ class Login extends React.Component {
                       <input type="password" name="signupConfirmPassword" onChange={this.handleSignupChange} placeholder="password confirm"/>
                     </div>
                   </div>
-                    <button className="ui button login-signup-buttons">Sign Up</button>
+                    <button className="ui button yellow login-signup-buttons">Sign Up</button>
                 </form>
               </div>
-
             </div>
 
           </div>
         </div>
       </div>
-
-
     )
   }
 }
