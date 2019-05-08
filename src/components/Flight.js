@@ -1,9 +1,6 @@
 import React from "react";
-import { Link } from 'react-router-dom'
 
 const Flight = (props) => {
-  // console.log(props)
-  // debugger
   const {flight} = props
 
   const currencySymbol = () => flight.currency === "USD" ? "$" : "€"

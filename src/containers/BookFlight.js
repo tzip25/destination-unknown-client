@@ -27,21 +27,21 @@ class BookFlight extends React.Component {
         <div className="header">No Matching Flights. Try Increasing your budget!</div>
     </div>
     } else if (this.props.flights[0] === "default") {
-      return <div className="whereto">Adventure awaits...</div>
+      return <div className="adventureAwaits">Adventure awaits...</div>
     } else if ( this.props.roundTripFlight === false){
       return (
         <div>
         < Sort handleSort={this.props.handleSort}/>
         {this.props.flights.map(flight => < Flight key={v4()} handleClick={this.handleClick} flight={flight} button={true}/>)}
         </div>
-      )  
+      )
     } else {
       return (
         <div>
         < Sort handleSort={this.props.handleSort}/>
         {this.props.flights.map(flight => < RoundTripFlight key={v4()} handleClick={this.handleClick} flight={flight} button={true}/>)}
         </div>
-      )  
+      )
     }
   }
 
