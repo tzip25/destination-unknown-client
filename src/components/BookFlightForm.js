@@ -1,15 +1,38 @@
 import React from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+var moment = require("moment");
+
 // const airports = require('airport-data')
 
 class BookFlightForm extends React.Component {
 
   state = {
     departure: "",
-    date: "",
-    returnDate: "",
+    placeholderOutDate: new Date(),
+    dateFormatted: "",
+    placeholderInDate: null,
+    returnDateFormatted: "",
     budget: "",
     currency: "USD",
-    roundTrip: false
+    roundTrip: false,
+  }
+
+  handleOutDateChange = (date) => {
+    const storedMoment = moment(date).format("DD/MM/YYYY");
+    this.setState({
+      placeholderOutDate: date,
+      dateFormatted: storedMoment
+    });
+  }
+
+  handleReturnDateChange = (date) => {
+    const storedMoment = moment(date).format("DD/MM/YYYY");
+    this.setState({
+      placeholderInDate: date,
+      returnDateFormatted: storedMoment
+    });
   }
 
   handleChange = (e) => {
@@ -17,13 +40,13 @@ class BookFlightForm extends React.Component {
       [e.target.name]: e.target.value
     })
   }
-
-  handleDateChange = (e) => {
-    let dateArr = e.target.value.split('-').reverse()
-    this.setState({
-      [e.target.name]: dateArr.join('/')
-    })
-  }
+  //
+  // handleDateChange = (e) => {
+  //   let dateArr = e.target.value.split('-').reverse()
+  //   this.setState({
+  //     [e.target.name]: dateArr.join('/')
+  //   })
+  // }
 
   setCurrency = (e) => {
     this.setState({
@@ -45,8 +68,6 @@ class BookFlightForm extends React.Component {
   }
 
   render(){
-    // console.log(airports)
-
     return(
       <form onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div className="two fields">
@@ -56,6 +77,7 @@ class BookFlightForm extends React.Component {
               <option value="EUR">EUR €</option>
             </select>
           </div>
+
           <div id="roundTrip-dropdown" className="field">
             <select className="ui search dropdown" onChange={this.setRoundTrip}>
               <option>One Way</option>
@@ -72,16 +94,28 @@ class BookFlightForm extends React.Component {
               <input onChange={this.handleChange} value={this.state.departure} name={"departure"} placeholder="Departure City" />
             </div>
           </div>
+
           <div className="field">
             <label>Departure Date</label>
-            <input type="date" onChange={this.handleDateChange} name={"date"} placeholder="Date" />
+            <DatePicker
+              minDate={new Date()}
+              selected={this.state.placeholderOutDate}
+              onChange={this.handleOutDateChange}
+            />
           </div>
+
           {this.state.roundTrip &&
           <div className="field">
             <label>Return Date</label>
-            <input type="date" onChange={this.handleDateChange} name={"returnDate"} placeholder="Date" />
+            <DatePicker
+              placeholderText={moment(this.state.placeholderOutDate).format("MM/DD/YYYY")}
+              selected={this.state.placeholderInDate}
+              minDate={this.state.placeholderOutDate}
+              onChange={this.handleReturnDateChange}
+              />
           </div>
           }
+
           <div className="field">
             <label>Max Budget</label>
             <div className="ui disabled icon input">

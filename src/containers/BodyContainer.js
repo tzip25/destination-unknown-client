@@ -1,10 +1,9 @@
 import React from "react";
 import { Route, Switch, Redirect } from 'react-router-dom'
-import Profile from './Profile'
+// import Profile from './Profile'
 import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
 import Login from './Login'
-import PurchaseFlight from '../components/PurchaseFlight'
 
 class BodyContainer extends React.Component {
 
@@ -14,6 +13,12 @@ class BodyContainer extends React.Component {
     isLoading: false,
     index: 0,
     roundTripFlight: false
+  }
+
+  clearPage = () => {
+    this.setState({
+      flights: ["default"]
+    })
   }
 
   handleSort = (sortOption) => {
@@ -172,24 +177,27 @@ class BodyContainer extends React.Component {
   }
 
   renderCurrentPage = () => {
-    const bookFlightComponent = < BookFlight nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights} handleSearchFlight={this.handleSearchFlight} roundTripFlight={this.state.roundTripFlight} flights={this.state.invalid ? "invalid" : this.renderFlights()} handleSort={this.handleSort} />
+    const bookFlightComponent = < BookFlight nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights} handleSearchFlight={this.handleSearchFlight} roundTripFlight={this.state.roundTripFlight} flights={this.state.invalid ? "invalid" : this.renderFlights()} handleSort={this.handleSort} clearPage={this.clearPage}/>
     return <Switch>
       <Route exact path='/' render={() => bookFlightComponent} />
-      <Route path='/profile' render={(routeProps) => < Profile {...routeProps}/>} />
+      <Route path='/my-flights' render={(routeProps) => < SavedFlights {...routeProps}/>} />
       <Route path='/search-flights' render={() => bookFlightComponent} />
-      <Route path='/my-flights' render={() => < SavedFlights />} />
-      <Route path='/purchase-flight' render={(routeProps) => < PurchaseFlight {...routeProps} />} />
       <Route path='/login' render={() => < Login setCurrentUser={this.props.setCurrentUser}/>} />
       <Redirect to="/search-flights" />
     </Switch>
   }
 
   renderLoadingScreen = () => {
+    // console.log(this.state.loading);
+    if(this.state.isLoading){
     return(
-      <div className="ui active inverted dimmer">
+      <div className="ui active dimmer">
         <div id="loading-text" className="ui text loader">Finding You Amazing Destinations!</div>
       </div>
     )
+    } else {
+      return null
+    }
   }
 
   handleSearchFlight = (formData) => {
@@ -201,7 +209,7 @@ class BodyContainer extends React.Component {
       fetch(`http://localhost:3000/flightsSearchRound`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({return_date: formData.returnDate, start_location: formData.departure, date: formData.date, price: formData.budget, currency: formData.currency})
+        body: JSON.stringify({return_date: formData.returnDateFormatted, start_location: formData.departure, date: formData.dateFormatted, price: formData.budget, currency: formData.currency})
       })
       .then(res=>res.json())
       .then(flights => {
@@ -225,7 +233,7 @@ class BodyContainer extends React.Component {
       fetch('http://localhost:3000/flightsSearch', {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({start_location: formData.departure, date: formData.date, price: formData.budget, currency: formData.currency})
+        body: JSON.stringify({start_location: formData.departure, date: formData.dateFormatted, price: formData.budget, currency: formData.currency})
       })
       .then(res=>res.json())
       .then(flights => {
@@ -248,9 +256,11 @@ class BodyContainer extends React.Component {
   }
 
   render(){
+    // console.log(this.state.flights);
     return(
       <div className="main-body">
-      {this.state.isLoading ? this.renderLoadingScreen(): this.renderCurrentPage()}
+      {this.renderLoadingScreen()}
+      {this.renderCurrentPage()}
       </div>
     )
   }
