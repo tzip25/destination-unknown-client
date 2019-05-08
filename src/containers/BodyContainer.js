@@ -1,10 +1,10 @@
 import React from "react";
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Profile from './Profile'
 import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
 import Login from './Login'
-// import Home from './Home'
+import PurchaseFlight from '../components/PurchaseFlight'
 
 class BodyContainer extends React.Component {
 
@@ -12,30 +12,40 @@ class BodyContainer extends React.Component {
     flights: ["default"],
     invalid: false,
     isLoading: false,
-    index: 0
+    index: 0,
+    roundTripFlight: false
   }
 
   handleSort = (sortOption) => {
-      switch(sortOption){
-        case "Price: Low to High":
-          return this.sortPriceLowToHigh()
-        case "Price: High to Low":
-          return this.sortPriceHighToLow()
-        case "Departure Time":
-          return this.sortDepartureTime()
-        case "Arrival Time":
-          return this.sortArrivalTime()
-        case "City: A-Z":
-          return this.sortCity()
-        default:
-          return this.sortPriceLowToHigh()
-      }
+    switch(sortOption){
+      case "Price: Low to High":
+        return this.sortPriceLowToHigh()
+      case "Price: High to Low":
+        return this.sortPriceHighToLow()
+      case "Departure Time":
+        return this.sortDepartureTime()
+      case "Arrival Time":
+        return this.sortArrivalTime()
+      case "City: A-Z":
+        return this.sortCity()
+      default:
+        return this.sortPriceLowToHigh()
+    }
   }
 
   sortCity = () => {
-    const sortedFlights = [...this.state.flights].sort((a,b) => {
-      return a.end_location.localeCompare(b.end_location)
-    })
+
+    let sortedFlights = []
+
+    if (this.state.roundTripFlight) {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
+        return a[1].end_location.localeCompare(b[1].end_location)
+      })
+    } else {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
+        return a.end_location.localeCompare(b.end_location)
+      })
+    }
     this.setState({
       flights: sortedFlights,
       index: 0
@@ -43,9 +53,18 @@ class BodyContainer extends React.Component {
   }
 
   sortDepartureTime = () => {
-    const sortedFlights = [...this.state.flights].sort((a,b) => {
-      return a.unx_dtime - b.unx_dtime
-    })
+
+    let sortedFlights = []
+
+    if (this.state.roundTripFlight) {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
+        return a[1].unx_dtime - b[1].unx_dtime
+      })
+    } else {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
+        return a.unx_dtime - b.unx_dtime
+      })
+    }
     this.setState({
       flights: sortedFlights,
       index: 0
@@ -53,9 +72,18 @@ class BodyContainer extends React.Component {
   }
 
   sortArrivalTime = () => {
-    const sortedFlights = [...this.state.flights].sort((a,b) => {
+
+    let sortedFlights = []
+
+    if (this.state.roundTripFlight) {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
+        return a[1].unx_atime - b[1].unx_atime
+      })
+    } else {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
       return a.unx_atime - b.unx_atime
-    })
+      })
+    }
     this.setState({
       flights: sortedFlights,
       index: 0
@@ -63,9 +91,18 @@ class BodyContainer extends React.Component {
   }
 
   sortPriceHighToLow = () => {
-    const sortedFlights = [...this.state.flights].sort((a,b) => {
+
+    let sortedFlights = []
+
+    if (this.state.roundTripFlight) {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
+        return b[0].price - a[0].price
+      })
+    } else {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
       return b.price - a.price
-    })
+      })
+    }
     this.setState({
       flights: sortedFlights,
       index: 0
@@ -73,9 +110,18 @@ class BodyContainer extends React.Component {
   }
 
   sortPriceLowToHigh = () => {
-    const sortedFlights = [...this.state.flights].sort((a,b) => {
+
+    let sortedFlights = []
+
+    if (this.state.roundTripFlight) {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
+        return a[0].price - b[0].price
+      })
+    } else {
+      sortedFlights = [...this.state.flights].sort((a,b) => {
       return a.price - b.price
-    })
+      })
+    }
     this.setState({
       flights: sortedFlights,
       index: 0
@@ -126,13 +172,15 @@ class BodyContainer extends React.Component {
   }
 
   renderCurrentPage = () => {
-    const bookFlightComponent = < BookFlight nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights} handleSearchFlight={this.handleSearchFlight} flights={this.state.invalid ? "invalid" : this.renderFlights()} handleSort={this.handleSort} />
+    const bookFlightComponent = < BookFlight nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights} handleSearchFlight={this.handleSearchFlight} roundTripFlight={this.state.roundTripFlight} flights={this.state.invalid ? "invalid" : this.renderFlights()} handleSort={this.handleSort} />
     return <Switch>
       <Route exact path='/' render={() => bookFlightComponent} />
       <Route path='/profile' render={(routeProps) => < Profile {...routeProps}/>} />
       <Route path='/search-flights' render={() => bookFlightComponent} />
       <Route path='/my-flights' render={() => < SavedFlights />} />
+      <Route path='/purchase-flight' render={(routeProps) => < PurchaseFlight {...routeProps} />} />
       <Route path='/login' render={() => < Login setCurrentUser={this.props.setCurrentUser}/>} />
+      <Redirect to="/search-flights" />
     </Switch>
   }
 
@@ -148,27 +196,55 @@ class BodyContainer extends React.Component {
     this.setState({
       isLoading: true
      })
-    fetch('http://localhost:3000/flightsSearch', {
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({start_location: formData.departure, date: formData.date, price: formData.budget, currency: formData.currency})
-    })
-    .then(res=>res.json())
-    .then(flights => {
-      if(flights[0] === "invalid"){
-        this.setState({
-          flights: [],
-          invalid: true,
-          isLoading: false
-        })
-      } else {
-        this.setState({
-          flights: flights,
-          invalid: false,
-          isLoading: false
-        })
-      }
-    })
+
+    if (formData.roundTrip) {
+      fetch(`http://localhost:3000/flightsSearchRound`, {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({return_date: formData.returnDate, start_location: formData.departure, date: formData.date, price: formData.budget, currency: formData.currency})
+      })
+      .then(res=>res.json())
+      .then(flights => {
+        if(flights[0] === "invalid"){
+          this.setState({
+            flights: [],
+            invalid: true,
+            isLoading: false,
+            roundTripFlight: false
+          })
+        } else {
+          this.setState({
+            flights: flights,
+            roundTripFlight: true,
+            isLoading: false,
+            invalid: false,
+          })
+        }
+      })
+    } else {
+      fetch('http://localhost:3000/flightsSearch', {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({start_location: formData.departure, date: formData.date, price: formData.budget, currency: formData.currency})
+      })
+      .then(res=>res.json())
+      .then(flights => {
+        if(flights[0] === "invalid"){
+          this.setState({
+            flights: [],
+            invalid: true,
+            isLoading: false
+          })
+        } else {
+          this.setState({
+            flights: flights,
+            invalid: false,
+            isLoading: false,
+            roundTripFlight: false
+          })
+        }
+      })
+    }
   }
 
   render(){
