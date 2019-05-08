@@ -5,6 +5,8 @@ import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
 import Login from './Login'
 
+const url = "https://destination-unknown-backend.herokuapp.com"
+
 class BodyContainer extends React.Component {
 
   state = {
@@ -205,7 +207,7 @@ class BodyContainer extends React.Component {
      })
 
     if (formData.roundTrip) {
-      fetch(`http://localhost:3000/flightsSearchRound`, {
+      fetch(`${url}/flightsSearchRound`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({return_date: formData.returnDateFormatted, start_location: formData.departure, date: formData.dateFormatted, price: formData.budget, currency: formData.currency})
@@ -229,7 +231,7 @@ class BodyContainer extends React.Component {
         }
       })
     } else {
-      fetch('http://localhost:3000/flightsSearch', {
+      fetch(`${url}/flightsSearch`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({start_location: formData.departure, date: formData.dateFormatted, price: formData.budget, currency: formData.currency})

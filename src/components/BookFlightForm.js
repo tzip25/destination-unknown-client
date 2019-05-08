@@ -4,8 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 var moment = require("moment");
 
-// const airports = require('airport-data')
-
 class BookFlightForm extends React.Component {
 
   state = {
@@ -40,13 +38,6 @@ class BookFlightForm extends React.Component {
       [e.target.name]: e.target.value
     })
   }
-  //
-  // handleDateChange = (e) => {
-  //   let dateArr = e.target.value.split('-').reverse()
-  //   this.setState({
-  //     [e.target.name]: dateArr.join('/')
-  //   })
-  // }
 
   setCurrency = (e) => {
     this.setState({

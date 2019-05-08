@@ -3,6 +3,7 @@ import PastFlights from '../components/PastFlights'
 import UpcomingFlights from '../components/UpcomingFlights'
 import withAuth from '../HOC/withAuth'
 
+const url = "https://destination-unknown-backend.herokuapp.com"
 
 class SavedFlights extends React.Component {
 
@@ -14,7 +15,7 @@ class SavedFlights extends React.Component {
 
   componentDidMount(){
     const token = localStorage.getItem("token")
-    fetch('http://localhost:3000/flights', {
+    fetch(`${url}/flights`, {
     headers: {"Authorization": token}
     })
     .then(res=>res.json())

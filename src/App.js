@@ -3,6 +3,8 @@ import './App.css';
 import Nav from './containers/Nav'
 import BodyContainer from './containers/BodyContainer'
 
+const url = "https://destination-unknown-backend.herokuapp.com"
+
 
 class App extends React.Component {
 
@@ -32,7 +34,7 @@ class App extends React.Component {
 		const token = localStorage.getItem("token")
 
 		if (token){
-			fetch("http://localhost:3000/auto_login", {
+			fetch(`${url}/auto_login`, {
 				headers: {
 					"Authorization": token
 				}
