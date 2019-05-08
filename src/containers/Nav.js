@@ -41,7 +41,9 @@ class Nav extends React.Component {
     return(
       <div>
         <div className="ui inverted secondary pointing blue menu">
-        <img className="logo" src="./logo3.png" width="355px" alt="destination unknown logo"/>
+        <Link to="/">
+          <img className="logo" src="./logo3.png" width="355px" alt="destination unknown logo"/>
+        </Link>
           < NavButton
             buttonName={"Book a Flight"}
             icon={"paper plane icon"}

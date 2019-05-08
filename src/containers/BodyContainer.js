@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Switch, Redirect } from 'react-router-dom'
-// import Profile from './Profile'
 import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
 import Login from './Login'
+import Home from '../components/Home'
+
 
 const url = "https://destination-unknown-backend.herokuapp.com"
 
@@ -181,7 +182,7 @@ class BodyContainer extends React.Component {
   renderCurrentPage = () => {
     const bookFlightComponent = < BookFlight nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights} handleSearchFlight={this.handleSearchFlight} roundTripFlight={this.state.roundTripFlight} flights={this.state.invalid ? "invalid" : this.renderFlights()} handleSort={this.handleSort} clearPage={this.clearPage}/>
     return <Switch>
-      <Route exact path='/' render={() => bookFlightComponent} />
+      <Route exact path='/' render={() => <Home/> } />
       <Route path='/my-flights' render={(routeProps) => < SavedFlights {...routeProps}/>} />
       <Route path='/search-flights' render={() => bookFlightComponent} />
       <Route path='/login' render={() => < Login setCurrentUser={this.props.setCurrentUser}/>} />
