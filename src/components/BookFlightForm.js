@@ -10,7 +10,7 @@ class BookFlightForm extends React.Component {
 
   state = {
     departure: "",
-    placeholderOutDate: new Date(),
+    placeholderOutDate: null,
     dateFormatted: "",
     placeholderInDate: null,
     returnDateFormatted: "",
@@ -98,6 +98,8 @@ class BookFlightForm extends React.Component {
           <div className="field">
             <label>Departure Date</label>
             <DatePicker
+              id="datePicker"
+              placeholderText={moment(new Date()).format("MM/DD/YYYY")}
               minDate={new Date()}
               selected={this.state.placeholderOutDate}
               onChange={this.handleOutDateChange}
@@ -108,13 +110,15 @@ class BookFlightForm extends React.Component {
           <div className="field">
             <label>Return Date</label>
             <DatePicker
-              placeholderText={moment(this.state.placeholderOutDate).format("MM/DD/YYYY")}
+              id= "datePicker"
+              placeholderText={this.state.placeholderInDate ? moment(this.state.placeholderOutDate).format("MM/DD/YYYY") : moment(new Date()).format("MM/DD/YYYY")}
               selected={this.state.placeholderInDate}
               minDate={this.state.placeholderOutDate}
               onChange={this.handleReturnDateChange}
               />
           </div>
           }
+
 
           <div className="field">
             <label>Max Budget</label>
