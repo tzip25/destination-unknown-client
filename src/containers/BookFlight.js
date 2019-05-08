@@ -3,17 +3,14 @@ import BookFlightForm from '../components/BookFlightForm'
 import Flight from '../components/Flight'
 import Sort from '../components/Sort'
 import MoreFlightsButton from '../components/MoreFlightsButton'
-import PurchaseFlight from '../components/PurchaseFlight'
-import { Redirect, Router, Route } from 'react-router-dom'
 import v4 from 'uuid'
 import RoundTripFlight from '../components/RoundTripFlight'
 
 
 class BookFlight extends React.Component {
 
-  state = {
-    bookFlight: false,
-    currentFlight: {}
+  componentWillUnmount(){
+      this.props.clearPage()
   }
 
   renderflights = () => {
@@ -57,45 +54,17 @@ class BookFlight extends React.Component {
           headers: {"Content-Type": "application/json", "Authorization": token},
           body: JSON.stringify(flight)
         })
-        // .then(res => res.json())
-        // .then(flight => {
-        //   this.setState({
-        //     bookFlight: true,
-        //     currentFlight: flight
-        //   })
-        // })
       }
       flight.length ? window.open(flight[0].booking_url) : window.open(flight.booking_url)
     }
 
-
-
-    renderBookflight = () => {
-      if (this.state.bookFlight) {
-        return (
-          // <PurchaseFlight flight={this.state.currentFlight} />
-          // this.props.history.push('/purchase-flight')
-          <Redirect to={{
-            pathname: '/purchase-flight',
-            state: { flight: this.state.currentFlight }
-        }}/>
-          // <Route path='/purchase-flight' render={ () => <PurchaseFlight />} />
-        )
-      } else {
-        return (
-          <div>
-          < BookFlightForm handleSearchFlight={this.props.handleSearchFlight}/>
-          {this.renderflights()}
-          {this.props.flights[0] === "default" ? null : <MoreFlightsButton nextFlights={this.props.nextFlights} previousFlights={this.props.previousFlights} firstFlights={this.props.firstFlights}/>}
-        </div>
-        )
-      }
-    }
-
   render(){
-    // console.log(this.state.bookFlight)
     return(
-      this.renderBookflight()
+      <div>
+      < BookFlightForm handleSearchFlight={this.props.handleSearchFlight}/>
+      {this.renderflights()}
+      {this.props.flights[0] === "default" ? null : <MoreFlightsButton nextFlights={this.props.nextFlights} previousFlights={this.props.previousFlights} firstFlights={this.props.firstFlights}/>}
+    </div>
     )
   }
 }

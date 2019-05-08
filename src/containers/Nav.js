@@ -13,11 +13,6 @@ class Nav extends React.Component {
           icon={"calendar icon"}
           path={"/my-flights"}
         />
-        < NavButton
-          buttonName={"Profile"}
-          icon={"user icon"}
-          path={"/profile"}
-        />
         <Link to="/login">
           <div
             onClick={this.props.logOut}
