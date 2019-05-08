@@ -18,11 +18,11 @@ class BookFlight extends React.Component {
 
     if (this.props.flights === "invalid") {
       return <div className="ui negative message error-message">
-        <div className="header">Invalid search. Please enter a valid city</div>
+        <div className="header">Invalid search. Try searching for a major city or use an airport code.</div>
       </div>
     } else if (this.props.flights.length === 0) {
       return <div className="ui yellow message error-message">
-        <div className="header">No Matching Flights. Try Increasing your budget!</div>
+        <div className="header">No Matching Flights 😞 Try Increasing your budget!</div>
     </div>
     } else if (this.props.flights[0] === "default") {
       return null
