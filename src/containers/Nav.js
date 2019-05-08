@@ -7,7 +7,7 @@ class Nav extends React.Component {
   loggedIn = () => {
     if(this.props.currentUser){
       return(
-        <div className="right menu">
+        <div className="right secondary menu">
         < NavButton
           buttonName={"My Flights"}
           icon={"calendar icon"}

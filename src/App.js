@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Route, Switch } from 'react-router-dom'
 import './App.css';
 import Nav from './containers/Nav'
 import BodyContainer from './containers/BodyContainer'
@@ -16,7 +15,7 @@ class App extends React.Component {
       currentUser: response.user
     }, () => {
       localStorage.setItem("token", response.token)
-      this.props.history.push('/profile')
+      this.props.history.push('/search-flights')
     })
   }
 

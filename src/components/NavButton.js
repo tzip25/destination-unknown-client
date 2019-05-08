@@ -8,10 +8,10 @@ class NavButton extends React.Component {
   render(){
     return(
       <Link to={this.props.path}>
-        <div id="nav-link" className={this.menuClass()} >
+      <a className={this.menuClass()} >
           <i className={this.props.icon}></i>
           {this.props.buttonName}
-        </div>
+      </a>
       </Link>
     )
   }
