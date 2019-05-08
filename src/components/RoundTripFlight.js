@@ -28,7 +28,7 @@ const RoundTripFlight = (props) => {
             <span id="small-flight-text">{props.flight[1].airline}</span></td>
             <td>{props.flight[1].departure_time}<br/><span id="small-flight-text">{new Date(`${props.flight[1].departure_date} EDT`).toDateString()}</span></td>
             <td>{props.flight[1].arrival_time}<br/><span id="small-flight-text">{new Date(`${props.flight[1].arrival_date} EDT`).toDateString()}</span></td>
-            {props.button ? <td><div className="ui right floated button blue" onClick={() => props.handleClick(props.flight[0])}>Book Flight</div></td> : null}
+            {props.button ? <td><div className="ui right floated button blue" onClick={() => props.handleClick(props.flight)}>Book Flight</div></td> : null}
           </tr>
           <tr>
             <td className="flight-price">{currencySymbol()}{props.flight[0].price}</td>
@@ -38,7 +38,7 @@ const RoundTripFlight = (props) => {
             <span id="small-flight-text">{props.flight[2].airline}</span></td>
             <td>{props.flight[2].departure_time}<br/><span id="small-flight-text">{new Date(`${props.flight[2].departure_date} EDT`).toDateString()}</span></td>
             <td>{props.flight[2].arrival_time}<br/><span id="small-flight-text">{new Date(`${props.flight[2].arrival_date} EDT`).toDateString()}</span></td>
-            {props.button ? <td><div className="ui right floated button blue" onClick={() => props.handleClick(props.flight[0])}>Book Flight</div></td> : null}
+            {props.button ? <td><div className="ui right floated button blue" onClick={() => props.handleClick(props.flight)}>Book Flight</div></td> : null}
           </tr>
         </tbody>
       </table>

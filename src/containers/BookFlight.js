@@ -47,23 +47,28 @@ class BookFlight extends React.Component {
 
     // booking/saving ticket function
     handleClick = (flight) => {
+
+      const url = flight.length ? "http://localhost:3000/roundTrip": 'http://localhost:3000/flights'
+
       const token = localStorage.getItem("token")
       if(token){
-        fetch('http://localhost:3000/flights', {
+        fetch(url, {
           method: 'POST',
           headers: {"Content-Type": "application/json", "Authorization": token},
           body: JSON.stringify(flight)
         })
-        .then(res => res.json())
-        .then(flight => {
-          this.setState({
-            bookFlight: true,
-            currentFlight: flight
-          })
-        })
+        // .then(res => res.json())
+        // .then(flight => {
+        //   this.setState({
+        //     bookFlight: true,
+        //     currentFlight: flight
+        //   })
+        // })
       }
-      // window.open(flight.booking_url)
+      flight.length ? window.open(flight[0].booking_url) : window.open(flight.booking_url)
     }
+
+
 
     renderBookflight = () => {
       if (this.state.bookFlight) {
