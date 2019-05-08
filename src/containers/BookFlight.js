@@ -46,11 +46,11 @@ class BookFlight extends React.Component {
     // booking/saving ticket function
     handleClick = (flight) => {
 
-      const url = flight.length ? "http://localhost:3000/roundTrip": 'http://localhost:3000/flights'
+      const newUrl = flight.length ? `${url}/roundTrip` : `${url}/flights`
 
       const token = localStorage.getItem("token")
       if(token){
-        fetch(url, {
+        fetch(newUrl, {
           method: 'POST',
           headers: {"Content-Type": "application/json", "Authorization": token},
           body: JSON.stringify(flight)
