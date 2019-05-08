@@ -49,23 +49,24 @@ class BookFlightForm extends React.Component {
 
     return(
       <form onSubmit={this.handleSubmit} className="ui form" id="search-form" >
-        <div id="currency-dropdown" className="field">
-          <select className="ui search dropdown" onChange={this.setCurrency}>
-            <option value="USD">USD $</option>
-            <option value="EUR">EUR €</option>
-          </select>
+        <div className="two fields">
+          <div id="currency-dropdown" className="field">
+            <select className="ui search dropdown" onChange={this.setCurrency}>
+              <option value="USD">USD $</option>
+              <option value="EUR">EUR €</option>
+            </select>
+          </div>
+          <div id="roundTrip-dropdown" className="field">
+            <select className="ui search dropdown" onChange={this.setRoundTrip}>
+              <option>One Way</option>
+              <option>Round Trip</option>
+            </select>
+          </div>
         </div>
 
-        <div id="roundTrip-dropdown" className="field">
-          <select className="ui search dropdown" onChange={this.setRoundTrip}>
-            <option>One Way</option>
-            <option>Round Trip</option>
-          </select>
-        </div>
-
-        <div className="three fields">
+        <div className={this.state.roundTrip ? "four fields" : "three fields"}>
           <div className="field">
-            <label>Departure City</label>
+            <label>Leaving From</label>
             <div className="ui disabled icon input">
               <i className="paper plane icon"></i>
               <input onChange={this.handleChange} value={this.state.departure} name={"departure"} placeholder="Departure City" />
@@ -75,9 +76,9 @@ class BookFlightForm extends React.Component {
             <label>Departure Date</label>
             <input type="date" onChange={this.handleDateChange} name={"date"} placeholder="Date" />
           </div>
-          {this.state.roundTrip && 
+          {this.state.roundTrip &&
           <div className="field">
-            <label>Arrival Date</label>
+            <label>Return Date</label>
             <input type="date" onChange={this.handleDateChange} name={"returnDate"} placeholder="Date" />
           </div>
           }
