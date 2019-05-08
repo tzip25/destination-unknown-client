@@ -69,7 +69,7 @@ class BookFlightForm extends React.Component {
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit} className="ui form" id="search-form" >
+      <form autocomplete="off" onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div className="two fields">
           <div id="currency-dropdown" className="field">
             <select className="ui search dropdown" onChange={this.setCurrency}>
@@ -111,7 +111,7 @@ class BookFlightForm extends React.Component {
             <label>Return Date</label>
             <DatePicker
               id= "datePicker"
-              placeholderText={this.state.placeholderInDate ? moment(this.state.placeholderOutDate).format("MM/DD/YYYY") : moment(new Date()).format("MM/DD/YYYY")}
+              placeholderText={this.state.dateFormatted && moment(new Date(this.state.placeholderOutDate)).format("MM/DD/YYYY")}
               selected={this.state.placeholderInDate}
               minDate={this.state.placeholderOutDate}
               onChange={this.handleReturnDateChange}
