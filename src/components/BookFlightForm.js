@@ -69,7 +69,7 @@ class BookFlightForm extends React.Component {
 
   render(){
     return(
-      <form autocomplete="off" onSubmit={this.handleSubmit} className="ui form" id="search-form" >
+      <form autoComplete="off" onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div className="two fields">
           <div id="currency-dropdown" className="field">
             <select className="ui search dropdown" onChange={this.setCurrency}>
@@ -92,6 +92,14 @@ class BookFlightForm extends React.Component {
             <div className="ui disabled icon input">
               <i className="paper plane icon"></i>
               <input onChange={this.handleChange} value={this.state.departure} name={"departure"} placeholder="Departure City" />
+            </div>
+          </div>
+
+          <div className="field">
+            <label>Max Budget</label>
+            <div className="ui disabled icon input">
+              <i className="dollar icon"></i>
+              <input type="number" onChange={this.handleChange} value={this.state.budget} name={"budget"} placeholder="Budget" />
             </div>
           </div>
 
@@ -119,15 +127,8 @@ class BookFlightForm extends React.Component {
           </div>
           }
 
-
-          <div className="field">
-            <label>Max Budget</label>
-            <div className="ui disabled icon input">
-              <i className="dollar icon"></i>
-              <input type="number" onChange={this.handleChange} value={this.state.budget} name={"budget"} placeholder="Budget" />
-            </div>
-          </div>
         </div>
+
           <button id="searchflight-button" className="ui button yellow">Find a Destination!</button>
       </form>
     )

@@ -111,9 +111,7 @@
 }
 
 #datePicker{
-  width: 15em;
-  /* max-width: 100em; */
-  max-width: 15em;
+  margin-right: 13vw;
 }
 
 .error-message {
