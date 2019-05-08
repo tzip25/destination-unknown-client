@@ -40,7 +40,7 @@ class App extends React.Component {
 			.then(res => res.json())
 			.then((response) => {
 				if (response.errors) {
-					alert(response.errors)
+					return null
 				} else {
 					this.setState({
 						currentUser: response

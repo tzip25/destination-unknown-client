@@ -20,7 +20,7 @@ function withAuth(MyComponent){
                     this.renderPage()
                 )
             }
-        } 
+        }
     )
 }
 
