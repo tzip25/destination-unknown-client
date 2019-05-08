@@ -188,7 +188,6 @@ class BodyContainer extends React.Component {
   }
 
   renderLoadingScreen = () => {
-    // console.log(this.state.loading);
     if(this.state.isLoading){
     return(
       <div className="ui active dimmer">
