@@ -14,7 +14,7 @@ class Home extends React.Component {
       on your ticket. <b>We'll find you unique destinations within your budget!</b>
       </p>
       <Link to="/search-flights"><button id="startAdventureButton" className="ui button yellow">Start Your Adventure Now</button></Link>
-      <p id="bottomP">Clicking on Buy Ticket button will redirect to www.Kiwi.com to purchse.</p>
+      <p id="bottomP">Clicking on Buy Ticket button will redirect you to www.kiwi.com to complete your purchase.</p>
       </div>
     )
   }
