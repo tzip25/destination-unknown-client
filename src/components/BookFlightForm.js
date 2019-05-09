@@ -1,13 +1,21 @@
 import React from "react";
 import DatePicker from "react-datepicker";
+import { Dropdown } from 'semantic-ui-react'
 import "react-datepicker/dist/react-datepicker.css";
-
+import v4 from 'uuid'
+import airports from '../airport_data'
 var moment = require("moment");
+
+const airportData = airports.map(airport => {
+  return {key: v4(), value: airport.iata, text: `${airport.city}, ${airport.name}`}
+})
+
 
 class BookFlightForm extends React.Component {
 
   state = {
     departure: "",
+    filteredAirports: [],
     placeholderOutDate: null,
     dateFormatted: "",
     placeholderInDate: null,
@@ -36,6 +44,22 @@ class BookFlightForm extends React.Component {
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
+    })
+  }
+
+  returnAirports = (search) => {
+    const selectedAirports = airportData.filter(airport => {
+      return airport.text.toLowerCase().includes(search.toLowerCase())
+    })
+    this.setState({
+      filteredAirports: selectedAirports.slice(0, 10)
+    })
+  }
+
+  handleAirportChange = (e, {value}) => {
+    this.returnAirports(e.target.value)
+    this.setState({
+      departure: value
     })
   }
 
@@ -78,12 +102,17 @@ class BookFlightForm extends React.Component {
         </div>
 
         <div className={this.state.roundTrip ? "four fields" : "three fields"}>
-          <div className="field">
-            <label>Leaving From</label>
-            <div className="ui disabled icon input">
-              <i className="paper plane icon"></i>
-              <input onChange={this.handleChange} value={this.state.departure} name={"departure"} placeholder="Departure City" />
-            </div>
+
+        <div className="field">
+        <label>Departure City</label>
+          <Dropdown
+            placeholder='Select Airport'
+            fluid
+            search
+            selection
+            options={this.state.filteredAirports}
+            onSearchChange={this.handleAirportChange}
+          />
           </div>
 
           <div className="field">
