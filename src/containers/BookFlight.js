@@ -22,7 +22,7 @@ class BookFlight extends React.Component {
       </div>
     } else if (this.props.flights.length === 0) {
       return <div className="ui yellow message error-message">
-        <div className="header">No Matching Flights 😞 Try Increasing your budget!</div>
+        <div className="header">No Matching Flights. Try Increasing your budget!</div>
     </div>
     } else if (this.props.flights[0] === "default") {
       return null
