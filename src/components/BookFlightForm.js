@@ -4,18 +4,18 @@ import { Dropdown } from 'semantic-ui-react'
 import "react-datepicker/dist/react-datepicker.css";
 import v4 from 'uuid'
 import airports from '../airport_data'
+var moment = require("moment");
 
-// const airportData = require('airport-data')
 const airportData = airports.map(airport => {
   return {key: v4(), value: airport.iata, text: `${airport.city}, ${airport.name}`}
 })
 
-var moment = require("moment");
 
 class BookFlightForm extends React.Component {
 
   state = {
     departure: "",
+    filteredAirports: [],
     placeholderOutDate: null,
     dateFormatted: "",
     placeholderInDate: null,
@@ -47,7 +47,17 @@ class BookFlightForm extends React.Component {
     })
   }
 
+  returnAirports = (search) => {
+    const selectedAirports = airportData.filter(airport => {
+      return airport.text.toLowerCase().includes(search.toLowerCase())
+    })
+    this.setState({
+      filteredAirports: selectedAirports.slice(0, 10)
+    })
+  }
+
   handleAirportChange = (e, {value}) => {
+    this.returnAirports(e.target.value)
     this.setState({
       departure: value
     })
@@ -73,7 +83,6 @@ class BookFlightForm extends React.Component {
   }
 
   render(){
-    // console.log(this.state.departure);
     return(
       <form autoComplete="off" onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div className="two fields">
@@ -96,14 +105,13 @@ class BookFlightForm extends React.Component {
 
         <div className="field">
         <label>Departure City</label>
-
           <Dropdown
             placeholder='Select Airport'
             fluid
             search
             selection
-            options={airportData}
-            onChange={this.handleAirportChange}
+            options={this.state.filteredAirports}
+            onSearchChange={this.handleAirportChange}
           />
           </div>
 
