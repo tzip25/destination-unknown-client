@@ -1,5 +1,7 @@
 import React from "react";
 
+const url = "https://destination-unknown-backend.herokuapp.com"
+
 class Login extends React.Component {
 
   state = {
@@ -41,7 +43,7 @@ class Login extends React.Component {
     e.preventDefault()
     const {signup} = this.state
     if (signup.signupPassword === signup.signupConfirmPassword) {
-      fetch(`http://localhost:3000/signup`, {
+      fetch(`${url}/signup`, {
         method: 'POST',
         body: JSON.stringify(signup),
         headers:{'Content-Type': 'application/json'}
@@ -67,7 +69,7 @@ class Login extends React.Component {
 
   login = (e) => {
     e.preventDefault()
-    fetch(`http://localhost:3000/login`, {
+    fetch(`${url}/login`, {
       method: 'POST',
       body: JSON.stringify(this.state.login),
       headers:{

@@ -1,9 +1,12 @@
 import React from "react";
 import { Route, Switch, Redirect } from 'react-router-dom'
-// import Profile from './Profile'
 import BookFlight from './BookFlight'
 import SavedFlights from './SavedFlights'
 import Login from './Login'
+import Home from '../components/Home'
+
+
+const url = "https://destination-unknown-backend.herokuapp.com"
 
 class BodyContainer extends React.Component {
 
@@ -179,7 +182,7 @@ class BodyContainer extends React.Component {
   renderCurrentPage = () => {
     const bookFlightComponent = < BookFlight nextFlights={this.nextFlights} firstFlights={this.firstFlights} previousFlights={this.previousFlights} handleSearchFlight={this.handleSearchFlight} roundTripFlight={this.state.roundTripFlight} flights={this.state.invalid ? "invalid" : this.renderFlights()} handleSort={this.handleSort} clearPage={this.clearPage}/>
     return <Switch>
-      <Route exact path='/' render={() => bookFlightComponent} />
+      <Route exact path='/' render={() => <Home/> } />
       <Route path='/my-flights' render={(routeProps) => < SavedFlights {...routeProps}/>} />
       <Route path='/search-flights' render={() => bookFlightComponent} />
       <Route path='/login' render={() => < Login setCurrentUser={this.props.setCurrentUser}/>} />
@@ -205,7 +208,7 @@ class BodyContainer extends React.Component {
      })
 
     if (formData.roundTrip) {
-      fetch(`http://localhost:3000/flightsSearchRound`, {
+      fetch(`${url}/flightsSearchRound`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({return_date: formData.returnDateFormatted, start_location: formData.departure, date: formData.dateFormatted, price: formData.budget, currency: formData.currency})
@@ -229,7 +232,7 @@ class BodyContainer extends React.Component {
         }
       })
     } else {
-      fetch('http://localhost:3000/flightsSearch', {
+      fetch(`${url}/flightsSearch`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({start_location: formData.departure, date: formData.dateFormatted, price: formData.budget, currency: formData.currency})

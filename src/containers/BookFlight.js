@@ -6,6 +6,7 @@ import MoreFlightsButton from '../components/MoreFlightsButton'
 import v4 from 'uuid'
 import RoundTripFlight from '../components/RoundTripFlight'
 
+const url = "https://destination-unknown-backend.herokuapp.com"
 
 class BookFlight extends React.Component {
 
@@ -17,14 +18,14 @@ class BookFlight extends React.Component {
 
     if (this.props.flights === "invalid") {
       return <div className="ui negative message error-message">
-        <div className="header">Invalid search. Please enter a valid city</div>
+        <div className="header">Invalid search. Try searching for a major city or use an airport code.</div>
       </div>
     } else if (this.props.flights.length === 0) {
       return <div className="ui yellow message error-message">
-        <div className="header">No Matching Flights. Try Increasing your budget!</div>
+        <div className="header">No Matching Flights 😞 Try Increasing your budget!</div>
     </div>
     } else if (this.props.flights[0] === "default") {
-      return <div className="adventureAwaits">Adventure awaits...</div>
+      return null
     } else if ( this.props.roundTripFlight === false){
       return (
         <div>
@@ -45,11 +46,11 @@ class BookFlight extends React.Component {
     // booking/saving ticket function
     handleClick = (flight) => {
 
-      const url = flight.length ? "http://localhost:3000/roundTrip": 'http://localhost:3000/flights'
+      const newUrl = flight.length ? `${url}/roundTrip` : `${url}/flights`
 
       const token = localStorage.getItem("token")
       if(token){
-        fetch(url, {
+        fetch(newUrl, {
           method: 'POST',
           headers: {"Content-Type": "application/json", "Authorization": token},
           body: JSON.stringify(flight)
