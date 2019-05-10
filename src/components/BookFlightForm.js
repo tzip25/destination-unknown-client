@@ -49,7 +49,7 @@ class BookFlightForm extends React.Component {
 
   returnAirports = (search) => {
     const selectedAirports = airportData.filter(airport => {
-      return airport.text.toLowerCase().includes(search.toLowerCase())
+      return airport.text.toLowerCase().includes(search.target.value.toLowerCase())
     })
     this.setState({
       filteredAirports: selectedAirports.slice(0, 10)
@@ -57,7 +57,7 @@ class BookFlightForm extends React.Component {
   }
 
   handleAirportChange = (e, {value}) => {
-    this.returnAirports(e.target.value)
+    // this.returnAirports(e.target.value)
     this.setState({
       departure: value
     })
@@ -83,6 +83,7 @@ class BookFlightForm extends React.Component {
   }
 
   render(){
+    console.log(this.state.departure);
     return(
       <form autoComplete="off" onSubmit={this.handleSubmit} className="ui form" id="search-form" >
         <div className="two fields">
@@ -110,8 +111,10 @@ class BookFlightForm extends React.Component {
             fluid
             search
             selection
+            value={this.state.departure}
             options={this.state.filteredAirports}
-            onSearchChange={this.handleAirportChange}
+            onSearchChange={this.returnAirports}
+            onChange={this.handleAirportChange}
           />
           </div>
 
